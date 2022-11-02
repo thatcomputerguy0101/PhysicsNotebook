@@ -1,0 +1,29 @@
+{
+  "name": "physicsnotebook",
+  "version": "0.1.0",
+  "description": "Digital notebook for solving physics problems.",
+  "contributors": [
+    "Alan Everett <thatcomputerguy0101@gmail.com>"
+  ],
+  "license": "UNLICENSED",
+  "private": true,
+  "homepage": "https://github.com/thatcomputerguy0101/PhysicsNotebook#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thatcomputerguy0101/PhysicsNotebook.git"
+  },
+  "bugs": {
+    "url": "https://github.com/thatcomputerguy0101/PhysicsNotebook/issues"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "es-module-shims": "^1.6.2",
+    "mathjs": "^11.3.2",
+    "mathquill": "^0.10.1-a",
+    "peggy": "^2.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
