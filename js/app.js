@@ -1,8 +1,8 @@
-const e = React.createElement
+import html from "./html.js"
 
 class Test extends React.Component {
   render() {
-    return e("div", null, "Hello", this.props.toWhat)
+    return html`<div>Hello ${this.props.toWhat}!</div>`
   }
 }
 
