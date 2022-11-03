@@ -208,15 +208,11 @@ export class HTMLTokenizer {
         this.active_token = new Token("tag_name", this.matchName())
       }
     } else if (["tag_name", "attribute_name", "attribute_value"].includes(this.active_token.type)) {
-      // After the start of the tag, can parse attributes or tag end
-      if (this.active_token.type == "tag_name" && this.source[0].match(/^\/>/) != null) {
-        // End of closing tag
-        this.active_token = new Token("tag_end", true)
-        this.source[0] = this.source[0].slice(2)
-      } else if (this.source[0].match(/^>/)) {
+      // Within a tag, can parse attributes or tag end
+      if (this.source[0].match(/^\/?>/)) {
         // End of opening tag or self-closing tag
-        this.active_token = new Token("tag_end", false)
-        this.source[0] = this.source[0].slice(1)
+        this.active_token = new Token("tag_end", this.source[0][0] == "/")
+        this.source[0] = this.source[0].slice(this.active_token.closing ? 2 : 1)
       } else if (this.active_token.type == "attribute_name" && this.source[0].match(/^=/)) {
         // Attribute assignment, followed by attribute value
         this.active_token = new Token("attribute_assign")
@@ -247,14 +243,15 @@ export class HTMLTokenizer {
     let tag_name
     if (this.source[0].length > 1) {
       // Pull from source
-      tag_name = this.source[0].match(/^[A-Za-z][A-Za-z0-9\-_:.]*/)[0]
-      if (tag_name.length == 0) {
+      let match = this.source[0].match(/^[A-Za-z][A-Za-z0-9\-_:.]+/)
+      if (match == null) {
         if (this.active_token.type == "tag_open") {
           throw new ParsingError(`Expected a tag name following ${this.active_token.closing ? "</" : "<"}`)
         } else {
           throw new ParsingError("Expected an attribute name")
         }
       }
+      tag_name = match[0]
       this.source[0] = this.source[0].slice(tag_name.length)
     } else {
       // Insert subsitution
@@ -276,10 +273,20 @@ export class HTMLTokenizer {
       if ((match = this.source[0].match(/^(?:"([^"<]*)"|'([^'<]*)')/)) != null) {
         attribute_value = match[1] ?? match[2]
       } else if ((match = this.source[0].match(/^[A-Za-z0-9\-_]+/)) != null) {
-        attribute_value = match[0]
+        // Attempt to parse boolean or number
+        if (match[0] == "true") {
+          attribute_value = true
+        } else if (match[0] == "false") {
+          attribute_value = false
+        } else if (match[0].match(/^(?:[0-9]+|[0-9]*\.[0-9]+)$/) != null) {
+          attribute_value = Number(match[0])
+        } else {
+          attribute_value = match[0]
+        }
       } else {
         throw new ParsingError("Expected an attribute value")
       }
+      this.source[0] = this.source[0].slice(match[0].length)
       attribute_value = decodeEntities(attribute_value)
     } else {
       // Insert subsitution
