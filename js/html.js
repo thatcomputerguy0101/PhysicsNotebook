@@ -275,7 +275,7 @@ export class HTMLTokenizer {
       let match
       if ((match = this.source[0].match(/^(?:"([^"<]*)"|'([^'<]*)')/)) != null) {
         attribute_value = match[1] ?? match[2]
-      } else if ((match = this.source[0].match(/^[A-Za-z0-9\-_]+/))) {
+      } else if ((match = this.source[0].match(/^[A-Za-z0-9\-_]+/)) != null) {
         attribute_value = match[0]
       } else {
         throw new ParsingError("Expected an attribute value")
@@ -286,6 +286,7 @@ export class HTMLTokenizer {
       this.source.splice(0, 1) // Remove empty string from source
       attribute_value = this.subsitutions.splice(0, 1)[0]
     }
+    return attribute_value
   }
 }
 
