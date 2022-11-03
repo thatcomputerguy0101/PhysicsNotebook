@@ -10,10 +10,16 @@ class DynamicTest extends React.Component {
   constructor(...args) {
     super(...args) // Construct Component superclass, passing all arguments
     this.state = {subject: this.props.subject}
+  }
 
-    setTimeout(() => {
+  componentDidMount() {
+    this.timerId = setTimeout(() => {
       this.setState({ subject: this.props.newSubject })
     }, this.props.delay)
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timerId)
   }
 
   render() {
