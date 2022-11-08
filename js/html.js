@@ -8,7 +8,12 @@ let Fragment = React.Fragment
   * When zero or multiple root-level elements are provided, this combines them together as a React.Fragment
   */
 export default function html(source, ...subsitutions) {
-  let tokenizer = new HTMLTokenizer(Array.from(source.raw), subsitutions)
+  let bindings = {}
+  if (typeof this == "object") {
+    bindings = this
+  }
+  bindings["React.Fragment"] = React.Fragment
+  let tokenizer = new HTMLTokenizer(Array.from(source.raw), subsitutions, bindings)
   let result = fragment(tokenizer)
   if (!tokenizer.isEmpty()) {
     throw new ParsingError("Unexpected input at end")
@@ -159,9 +164,10 @@ function tag(tokenizer) {
 }
 
 export class HTMLTokenizer {
-  constructor(source, subsitutions) {
+  constructor(source, subsitutions, bindings) {
     this.source = source
     this.subsitutions = subsitutions
+    this.bindings = bindings
     // Initial state machine state
     this.active_token = new Token("text", null)
     this.active_token.consume()
@@ -258,8 +264,9 @@ export class HTMLTokenizer {
       this.source.splice(0, 1) // Remove empty string from source
       tag_name = this.subsitutions.splice(0, 1)[0]
     }
-    if (tag_name == "React.Fragment") {
-      tag_name = React.Fragment
+    if (tag_name in this.bindings) {
+      // Bindings represent subsitutions of names to special element types
+      tag_name = this.bindings[tag_name]
     }
     return tag_name
   }

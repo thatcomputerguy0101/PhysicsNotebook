@@ -1,8 +1,13 @@
 import html from "./html.js"
+import { Equation } from "./equationPacks/equation.js"
 
 class Test extends React.Component {
   render() {
-    return html`<div>Hello ${this.props.toWhat}!</div>`
+    return html.bind({Equation})`
+    <div>
+      Hello ${this.props.toWhat}!<br/>
+      <Equation/>
+    </div>`
   }
 }
 
@@ -27,6 +32,7 @@ class DynamicTest extends React.Component {
   }
 }
 
+// These two lines are equivalent:
 // let test = React.createElement(DynamicTest, {subject: "World", newSubject: "Bees", delay: 2000})
 let test = html`<${DynamicTest} subject="World" newSubject="Physics" delay=2000/>`
 
