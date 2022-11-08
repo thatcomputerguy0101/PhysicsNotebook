@@ -3,7 +3,8 @@ import { Equation } from "./equationPacks/equation.js"
 
 class Test extends React.Component {
   render() {
-    return html.bind({Equation})`
+    let html = html.bind({Equation})
+    return html`
     <div>
       Hello ${this.props.toWhat}!<br/>
       <Equation/>
