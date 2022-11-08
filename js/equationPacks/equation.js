@@ -8,10 +8,10 @@ export class Equation extends React.Component {
 
   componentDidMount() {
     // When added to the visible structure
-    MQ.MathField(this.mqRef.current)
+    MQ.StaticMath(this.mqRef.current)
   }
 
   render() {
-    return html`<div ref=${this.mqRef}/>`
+    return html`<span ref=${this.mqRef}>${this.props.children}</span>`
   }
 }

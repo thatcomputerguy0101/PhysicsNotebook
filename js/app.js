@@ -3,11 +3,11 @@ import { Equation } from "./equationPacks/equation.js"
 
 class Test extends React.Component {
   render() {
-    let html = html.bind({Equation})
-    return html`
+    let rhtml = html.bind({Equation})
+    return rhtml`
     <div>
       Hello ${this.props.toWhat}!<br/>
-      <Equation/>
+      <Equation>\Sigma F = m \cdot a</Equation>
     </div>`
   }
 }
