@@ -1,13 +1,15 @@
 import html from "./html.js"
 import { Equation } from "./equationPacks/equation.js"
+import { Constant } from "./constant.js"
 
 class Test extends React.Component {
   render() {
-    let rhtml = html.bind({Equation})
+    let rhtml = html.bind({Equation, Constant})
     return rhtml`
     <div>
       Hello ${this.props.toWhat}!<br/>
       <Equation>\Sigma F = m \cdot a</Equation>
+      <Constant name="g" value=5/>
     </div>`
   }
 }
