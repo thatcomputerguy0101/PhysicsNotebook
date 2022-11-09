@@ -9,7 +9,7 @@ class Test extends React.Component {
     return rhtml`
     <div>
       Hello ${this.props.toWhat}!<br/>
-      <Equation>\Sigma F = m \cdot a</Equation>
+      <Equation>\Sigma F = m \cdot a</Equation><br/>
       <Constant name="g" value=5/><br/>
       <EquationState value="F_g=m a_g"/>
     </div>`
