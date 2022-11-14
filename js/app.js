@@ -1,7 +1,8 @@
 import html from "./html.js"
 import { Equation } from "./equationPacks/equation.js"
-import { Constant } from "./constant.js"
+import { Constant } from "./workbooks/constant.js"
 import { EquationState } from "./workbooks/equationState.js"
+import "./manipulations/selection.js"
 
 class Test extends React.Component {
   render() {
@@ -9,7 +10,7 @@ class Test extends React.Component {
     return rhtml`
     <div>
       Hello ${this.props.toWhat}!<br/>
-      <Equation>\Sigma F = m \cdot a</Equation><br/>
+      <Equation>${this.props.forces} = m \cdot a</Equation><br/>
       <Constant name="g" value=5/><br/>
       <EquationState value="F_g=m a_g"/>
     </div>`
@@ -19,12 +20,15 @@ class Test extends React.Component {
 class DynamicTest extends React.Component {
   constructor(...args) {
     super(...args) // Construct Component superclass, passing all arguments
-    this.state = {subject: this.props.subject}
+    this.state = {
+      subject: this.props.subject,
+      forces: "\\Sigma F"
+    }
   }
 
   componentDidMount() {
     this.timerId = setTimeout(() => {
-      this.setState({ subject: this.props.newSubject })
+      this.setState({ subject: this.props.newSubject, forces: "F_g + F_T" })
     }, this.props.delay)
   }
 
@@ -33,7 +37,7 @@ class DynamicTest extends React.Component {
   }
 
   render() {
-    return html`<${Test} toWhat=${this.state.subject}/>`
+    return html`<${Test} toWhat=${this.state.subject} forces=${this.state.forces}/>`
   }
 }
 

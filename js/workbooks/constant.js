@@ -1,5 +1,5 @@
-import html from "./html.js"
-import { Equation } from "./equationPacks/equation.js"
+import html from "../html.js"
+import { Equation } from "../equationPacks/equation.js"
 
 export class Constant extends React.Component {
   constructor(...args) {
@@ -9,7 +9,7 @@ export class Constant extends React.Component {
     this.state = {
       name: this.props.name,
       value: this.props.value,
-      editable: false
+      editable: true
     }
   }
 
@@ -18,24 +18,24 @@ export class Constant extends React.Component {
     this.setState({
       editable: true
     })
+    console.log(`${this.state.name} was clicked`)
   }
 
   render() {
     let rhtml = html.bind({Equation})
     if (this.state.editable) {
       return rhtml`
-      <Equation>
-        \MathQuillMathField{${this.state.name}} = \MathQuillMathField{${this.state.value}}
+      <Equation onClick=${this.onClick}>
+        \MathQuillMathField{${this.state.name}} = \MathQuillMathField{${this.state.value}} \left[ \MathQuillMathField{${this.state.unit}} \right]
       </Equation>
       `
     } else {
       return rhtml`
-      <Equation>
-        ${this.state.name} = ${this.state.value}
+      <Equation onClick=${this.onClick}>
+        ${this.state.name} = ${this.state.value} \left[ ${this.state.unit} \right]
       </Equation>
       `
     }
   }
-
 
 }
