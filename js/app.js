@@ -39,7 +39,7 @@ class DynamicTest extends React.Component {
   }
 
   render() {
-    if (this.appTest) {
+    if (this.state.appTest) {
       let rhtml = html.bind({App})
       return rhtml`
       <App/>
