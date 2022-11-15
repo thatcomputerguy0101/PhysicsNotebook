@@ -1,0 +1,10 @@
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+.app > header {  // inside app
+  width: 100vw;
+  height: 70px;
+  background-color: #77DD77;
+}

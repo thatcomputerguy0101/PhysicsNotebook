@@ -47,7 +47,7 @@ class DynamicTest extends React.Component {
     } else {
       return html`
       <${Test} toWhat=${this.state.subject} forces=${this.state.forces}/>
-      <button onclick=${e => this.state.appTest = true}>Test site</button>
+      <button onClick=${e => this.setState({ appTest: true })}>Test site</button>
       `
     }
   }
