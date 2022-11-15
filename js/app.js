@@ -2,6 +2,7 @@ import html from "./html.js"
 import { Equation } from "./equationPacks/equation.js"
 import { Constant } from "./workbooks/constant.js"
 import { EquationState } from "./workbooks/equationState.js"
+import { App } from "./display/app.js"
 import "./manipulations/selection.js"
 
 class Test extends React.Component {
@@ -22,7 +23,8 @@ class DynamicTest extends React.Component {
     super(...args) // Construct Component superclass, passing all arguments
     this.state = {
       subject: this.props.subject,
-      forces: "\\Sigma F"
+      forces: "\\Sigma F",
+      appTest: false
     }
   }
 
@@ -37,7 +39,17 @@ class DynamicTest extends React.Component {
   }
 
   render() {
-    return html`<${Test} toWhat=${this.state.subject} forces=${this.state.forces}/>`
+    if (this.appTest) {
+      let rhtml = html.bind({App})
+      return rhtml`
+      <App/>
+      `
+    } else {
+      return html`
+      <${Test} toWhat=${this.state.subject} forces=${this.state.forces}/>
+      <button onclick=${e => this.state.appTest = true}>Test site</button>
+      `
+    }
   }
 }
 
