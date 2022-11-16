@@ -8,6 +8,7 @@ export class App extends React.Component {
       <header></header>
       <aside>
         <header>
+          <!-- TODO: Replace placeholder icons with real icons -->
           <img src="/icons/placeholder.svg"/>
           <div> Givens </div>
           <img src="/icons/placeholder.svg"/>
