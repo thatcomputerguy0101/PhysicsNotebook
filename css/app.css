@@ -12,6 +12,9 @@ body:has(.app) {
   width: 100vw;
   height: 70px;
   background-color: #89eda0;
+  text-align: center;
+  font-family: Verdana, serif;
+  font-size: 30px;
 }
 
 .app > aside {    /* both side bars */
@@ -41,8 +44,6 @@ body:has(.app) {
   width: 100%;
   height: 30px;
   background-color: #d3ffe6;
-  /* gap: 10px;   trying to add space between images and border
-  justify-content: space-around; */
 }
 
 .app > aside > header > div {

@@ -5,7 +5,9 @@ export class App extends React.Component {
     let rhtml = html.bind({})
     return rhtml`
     <div className="app">
-      <header></header>
+      <header>
+        <div> Physics Notebook </div>
+      </header>
       <aside>
         <header>
           <img src="/icons/placeholder.svg"/>
