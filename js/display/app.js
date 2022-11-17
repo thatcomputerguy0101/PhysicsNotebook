@@ -10,7 +10,6 @@ export class App extends React.Component {
       </header>
       <aside>
         <header>
-          <!-- TODO: Replace placeholder icons with real icons -->
           <img src="/icons/placeholder.svg"/>
           <div> Givens </div>
           <img src="/icons/placeholder.svg"/>
@@ -18,7 +17,12 @@ export class App extends React.Component {
       </aside>
       <main>
         <section></section>
-        <footer></footer>
+        <footer>
+          <header>
+            <div> Equations </div>
+            <img src="/icons/placeholder.svg"/>
+          </header>
+        </footer>
       </main>
       <aside>
         <header>
