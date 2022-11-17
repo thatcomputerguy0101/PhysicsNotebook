@@ -63,6 +63,10 @@ function fragment(tokenizer) {
   }
   let token = tokenizer.nextToken()
   let first
+  if (token.type == "comment_start") {
+    comment(tokenizer)
+    token = tokenizer.nextToken()
+  }
   if (token.type == "tag_start" && !token.closing) {
     // Tag
     first = tag(tokenizer)
@@ -78,12 +82,20 @@ function fragment(tokenizer) {
     return first
   }
   token = tokenizer.nextToken()
+  if (token.type == "comment_start") {
+    comment(tokenizer)
+    token = tokenizer.nextToken()
+  }
   if (token.type == "tag_start" && token.closing) {
     // Single element (Tag or Text)
     return first
   } else {
     let contents = [first]
     while (token.type != "tag_start" || !token.closing) {
+      if (token.type == "comment_start") {
+        comment(tokenizer)
+        token = tokenizer.nextToken()
+      }
       if (token.type == "tag_start" && !token.closing) {
         // Tag
         contents.push(tag(tokenizer))
@@ -112,28 +124,28 @@ function tag(tokenizer) {
     throw new ParsingError(`Invalid character, expected to find the name of a tag`)
   }
   name.consume()
-  let attr_or_end = tokenizer.nextToken()
+  let attrOrEnd = tokenizer.nextToken()
   let attributes = {}
-  while (attr_or_end.type == "attribute_name") {
-    let attribute = attr_or_end
-    attr_or_end.consume()
-    attr_or_end = tokenizer.nextToken()
+  while (attrOrEnd.type == "attribute_name") {
+    let attribute = attrOrEnd
+    attrOrEnd.consume()
+    attrOrEnd = tokenizer.nextToken()
     let value = true
-    if (attr_or_end.type == "attribute_assign") {
-      attr_or_end.consume()
+    if (attrOrEnd.type == "attribute_assign") {
+      attrOrEnd.consume()
       value = tokenizer.nextToken()
       if (value.type != "attribute_value") {
         throw new ParsingError(`Expected an attribute value, got ${value.type} instead`)
       }
       value = value.consume().data
-      attr_or_end = tokenizer.nextToken()
+      attrOrEnd = tokenizer.nextToken()
     }
     attributes[attribute.name] = value
   }
-  if (attr_or_end.type != "tag_end") {
+  if (attrOrEnd.type != "tag_end") {
       throw new ParsingError(`Invalid character, expected to find ">"`)
   }
-  let end = attr_or_end.consume()
+  let end = attrOrEnd.consume()
   if (end.closing || name.name in void_elements) {
     return React.createElement(name.name, attributes)
   } else {
@@ -163,6 +175,25 @@ function tag(tokenizer) {
   }
 }
 
+function comment() {
+  // This currently just verifies correct comment syntax and discards the results
+  let start = tokenizer.nextToken()
+  if (start.type != "comment_start") {
+    throw new ParsingError(`Invalid character, expected to find "<!--"`)
+  }
+  start.consume()
+
+  let bodyOrEnd = tokenizer.nextToken()
+  while (bodyOrEnd.type != "comment_end") {
+    if (bodyOrEnd.type != "comment_body") {
+      throw new ParsingError(`Invalid token, expected a comment body or "-->"`)
+    }
+    bodyOrEnd.consume()
+    bodyOrEnd = tokenizer.nextToken()
+  }
+  bodyOrEnd.consume()
+}
+
 export class HTMLTokenizer {
   constructor(source, subsitutions, bindings) {
     this.source = source
@@ -190,7 +221,10 @@ export class HTMLTokenizer {
 
     if (["tag_end", "text"].includes(this.active_token.type)) {
       // Not in a tag, can start a new tag or can parse text
-      if (this.source[0].match(/^</) != null) {
+      if (this.source[0].match(/^<!--/)) {
+        this.active_token = new Token("comment_start")
+        this.source[0] = this.source[0].slice(4)
+      } else if (this.source[0].match(/^</) != null) {
         // Tag start
         this.active_token = new Token("tag_start", this.source[0].match(/^<\//) != null)
         this.source[0] = this.source[0].slice(this.active_token.closing ? 2 : 1)
@@ -203,6 +237,13 @@ export class HTMLTokenizer {
         let data = RegExp.lastMatch
         this.active_token = new Token("text", decodeEntities(data))
         this.source[0] = this.source[0].slice(this.active_token.data.length)
+      }
+    } else if (["comment_start", "comment_body"].includes(this.active_token.type)) {
+      if (this.source[0].match(/^-->/)) {
+        this.active_token = new Token("comment_end")
+        this.source[0] = this.source[0].slice(3)
+      } else {
+        this.active_token = new Token("comment_body", this.matchComment())
       }
     } else if (this.active_token.type == "tag_start") {
       // At the start of a tag
@@ -301,6 +342,22 @@ export class HTMLTokenizer {
       attribute_value = this.subsitutions.splice(0, 1)[0]
     }
     return attribute_value
+  }
+
+  matchComment() {
+    let text
+    if (this.source[0].length > 0) {
+      let match = this.source.match(/^(?:[^-]|-[^-]|--[^>])+/)
+      if (match == null) {
+        throw new ParsingError("Encountered unexpected comment end")
+      }
+      text = match[0]
+      this.source[0] = this.source[0].slice(text.length)
+    } else {
+      this.source.splice(0, 1) // Remove empty string from source
+      text = this.subsitutions.splice(0, 1)[0]
+    }
+    return text
   }
 }
 
