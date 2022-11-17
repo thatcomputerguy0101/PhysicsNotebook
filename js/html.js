@@ -150,23 +150,23 @@ function tag(tokenizer) {
     return React.createElement(name.name, attributes)
   } else {
     let contents = fragment(tokenizer)
-    let close_start = tokenizer.nextToken()
-    if (close_start.type != "tag_start" || !close_start.closing) {
+    let closeStart = tokenizer.nextToken()
+    if (closeStart.type != "tag_start" || !closeStart.closing) {
       throw new ParsingError(`Invalid character, expected to find "</"`)
     }
-    close_start.consume()
-    let close_name = tokenizer.nextToken()
-    if (close_name.type != "tag_name") {
+    closeStart.consume()
+    let closeName = tokenizer.nextToken()
+    if (closeName.type != "tag_name") {
       throw new ParsingError(`Invalid character, expected to find the name of a tag`)
-    } else if (close_name.name != name.name) {
-      throw new ParsingError(`Mismatched tags, found ${close_name.name}, expected ${name.name}`)
+    } else if (closeName.name != name.name) {
+      throw new ParsingError(`Mismatched tags, found ${closeName.name}, expected ${name.name}`)
     }
-    close_name.consume()
-    let close_end = tokenizer.nextToken()
-    if (close_end.type != "tag_end" || close_end.closing) {
+    closeName.consume()
+    let closeEnd = tokenizer.nextToken()
+    if (closeEnd.type != "tag_end" || closeEnd.closing) {
       throw new ParsingError(`Invalid character, expected to find ">"`)
     }
-    close_end.consume()
+    closeEnd.consume()
     if (Array.isArray(contents)) {
       return React.createElement(name.name, attributes, ...contents)
     } else {
@@ -175,7 +175,7 @@ function tag(tokenizer) {
   }
 }
 
-function comment() {
+function comment(tokenizer) {
   // This currently just verifies correct comment syntax and discards the results
   let start = tokenizer.nextToken()
   if (start.type != "comment_start") {
@@ -200,8 +200,8 @@ export class HTMLTokenizer {
     this.subsitutions = subsitutions
     this.bindings = bindings
     // Initial state machine state
-    this.active_token = new Token("text", null)
-    this.active_token.consume()
+    this.activeToken = new Token("text", null)
+    this.activeToken.consume()
   }
 
   isEmpty() {
@@ -209,8 +209,8 @@ export class HTMLTokenizer {
   }
 
   nextToken() {
-    if (!this.active_token.consumed) {
-      return this.active_token
+    if (!this.activeToken.consumed) {
+      return this.activeToken
     }
 
     if (this.isEmpty()) {
@@ -219,65 +219,65 @@ export class HTMLTokenizer {
 
     this.stripWhitespace()
 
-    if (["tag_end", "text"].includes(this.active_token.type)) {
+    if (["tag_end", "comment_end", "text"].includes(this.activeToken.type)) {
       // Not in a tag, can start a new tag or can parse text
       if (this.source[0].match(/^<!--/)) {
-        this.active_token = new Token("comment_start")
+        this.activeToken = new Token("comment_start")
         this.source[0] = this.source[0].slice(4)
       } else if (this.source[0].match(/^</) != null) {
         // Tag start
-        this.active_token = new Token("tag_start", this.source[0].match(/^<\//) != null)
-        this.source[0] = this.source[0].slice(this.active_token.closing ? 2 : 1)
+        this.activeToken = new Token("tag_start", this.source[0].match(/^<\//) != null)
+        this.source[0] = this.source[0].slice(this.activeToken.closing ? 2 : 1)
       } else if (this.source[0].length == 0) {
         // Text (or external tag) from subsitution
         this.source.splice(0, 1) // Remove empty string from source
-        this.active_token = new Token("text", this.subsitutions.splice(0, 1)[0])
+        this.activeToken = new Token("text", this.subsitutions.splice(0, 1)[0])
       } else if (this.source[0].match(/[^<>]+/) != null) {
         // Text from source
         let data = RegExp.lastMatch
-        this.active_token = new Token("text", decodeEntities(data))
-        this.source[0] = this.source[0].slice(this.active_token.data.length)
+        this.activeToken = new Token("text", decodeEntities(data))
+        this.source[0] = this.source[0].slice(this.activeToken.data.length)
       }
-    } else if (["comment_start", "comment_body"].includes(this.active_token.type)) {
+    } else if (["comment_start", "comment_body"].includes(this.activeToken.type)) {
       if (this.source[0].match(/^-->/)) {
-        this.active_token = new Token("comment_end")
+        this.activeToken = new Token("comment_end")
         this.source[0] = this.source[0].slice(3)
       } else {
-        this.active_token = new Token("comment_body", this.matchComment())
+        this.activeToken = new Token("comment_body", this.matchComment())
       }
-    } else if (this.active_token.type == "tag_start") {
+    } else if (this.activeToken.type == "tag_start") {
       // At the start of a tag
       if (this.source[0].match(/^\/?>/) != null) {
         // If an empty tag, return a fragment
-        this.active_token = new Token("tag_name", Fragment)
+        this.activeToken = new Token("tag_name", Fragment)
       } else {
         // Parse the name of the tag
-        this.active_token = new Token("tag_name", this.matchName())
+        this.activeToken = new Token("tag_name", this.matchName())
       }
-    } else if (["tag_name", "attribute_name", "attribute_value"].includes(this.active_token.type)) {
+    } else if (["tag_name", "attribute_name", "attribute_value"].includes(this.activeToken.type)) {
       // Within a tag, can parse attributes or tag end
       if (this.source[0].match(/^\/?>/)) {
         // End of opening tag or self-closing tag
-        this.active_token = new Token("tag_end", this.source[0][0] == "/")
-        this.source[0] = this.source[0].slice(this.active_token.closing ? 2 : 1)
-      } else if (this.active_token.type == "attribute_name" && this.source[0].match(/^=/)) {
+        this.activeToken = new Token("tag_end", this.source[0][0] == "/")
+        this.source[0] = this.source[0].slice(this.activeToken.closing ? 2 : 1)
+      } else if (this.activeToken.type == "attribute_name" && this.source[0].match(/^=/)) {
         // Attribute assignment, followed by attribute value
-        this.active_token = new Token("attribute_assign")
+        this.activeToken = new Token("attribute_assign")
         this.source[0] = this.source[0].slice(1)
       } else {
         // Attribute
-        this.active_token = new Token("attribute_name", this.matchName())
+        this.activeToken = new Token("attribute_name", this.matchName())
       }
-    } else if (this.active_token.type == "attribute_assign") {
+    } else if (this.activeToken.type == "attribute_assign") {
       // Attribute value
-      this.active_token = new Token("attribute_value", this.matchString())
+      this.activeToken = new Token("attribute_value", this.matchString())
     }
 
-    if (this.active_token.consumed) {
+    if (this.activeToken.consumed) {
       throw new ParsingError("Unable to match any tokens")
     }
 
-    return this.active_token
+    return this.activeToken
   }
 
   stripWhitespace() {
@@ -292,8 +292,8 @@ export class HTMLTokenizer {
       // Pull from source
       let match = this.source[0].match(/^[A-Za-z][A-Za-z0-9\-_:.]+/)
       if (match == null) {
-        if (this.active_token.type == "tag_open") {
-          throw new ParsingError(`Expected a tag name following ${this.active_token.closing ? "</" : "<"}`)
+        if (this.activeToken.type == "tag_open") {
+          throw new ParsingError(`Expected a tag name following ${this.activeToken.closing ? "</" : "<"}`)
         } else {
           throw new ParsingError("Expected an attribute name")
         }
@@ -347,7 +347,7 @@ export class HTMLTokenizer {
   matchComment() {
     let text
     if (this.source[0].length > 0) {
-      let match = this.source.match(/^(?:[^-]|-[^-]|--[^>])+/)
+      let match = this.source[0].match(/^(?:[^-]|-[^-]|--[^>])+/)
       if (match == null) {
         throw new ParsingError("Encountered unexpected comment end")
       }
