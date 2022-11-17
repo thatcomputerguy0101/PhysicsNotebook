@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000s/svg" width="30" height="30">
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30">
   <rect width="30" height="30" fill="gray"/>
   <text x="15" y="20" text-anchor="middle" font-size="20" fill="white">?</text>
 </svg>
