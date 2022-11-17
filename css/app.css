@@ -23,6 +23,7 @@ body:has(.app) {
   border-top: 4px solid #6ac67e;
   font-size: 20px;
   font-family: Verdana, serif;
+  overflow: auto;
 }
 
 .app > main > footer > header {
@@ -42,6 +43,7 @@ body:has(.app) {
   width: min(20vw, calc(50vw - 300px));
   height: calc(100vh - 70px);
   background-color: #f0f9f2;
+  overflow: auto;
 }
 
 .app > aside:first-of-type {  /* only left side bar */
