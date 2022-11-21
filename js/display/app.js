@@ -8,10 +8,12 @@ export class App extends React.Component {
       <header>
         <img id="logo" src="/icons/logo.svg"/>
         <div> Physics Notebook </div>
-        <img id="share" src="/icons/share.svg"/>
-        <img id="help" src="/icons/help.svg"/>
-        <img id="profile" src="/icons/profile.svg"/>
-        <img id="settings" src="/icons/settings.svg"/>
+        <div>
+          <img id="share" src="/icons/share.svg"/>
+          <img id="help" src="/icons/help.svg"/>
+          <img id="profile" src="/icons/profile.svg"/>
+          <img id="settings" src="/icons/settings.svg"/>
+        </div>
       </header>
       <aside>
         <header>
