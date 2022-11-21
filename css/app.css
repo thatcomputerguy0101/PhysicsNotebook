@@ -115,3 +115,7 @@ body:has(.app) {
 #collapseDown {
   transform: rotate(90deg);
 }
+
+#title {
+  position: relative; left: 5%;
+}

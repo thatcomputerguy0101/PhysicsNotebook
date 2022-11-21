@@ -7,7 +7,7 @@ export class App extends React.Component {
     <div className="app">
       <header>
         <img id="logo" src="/icons/logo.svg"/>
-        <div> Physics Notebook </div>
+        <div id="title"> Physics Notebook </div>
         <div>
           <img id="share" src="/icons/share.svg"/>
           <img id="help" src="/icons/help.svg"/>
