@@ -17,7 +17,21 @@ body:has(.app) {
   font-family: 'Montserrat', sans-serif;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+}
+
+.app > header > .icons {
+  flex-grow: 1;
+  margin: 10px;
+}
+
+.app > header > .icons > * {
+  margin: 10px;
+}
+
+.app > header > #title {
+  flex-grow: 2;
+  margin: 10px;
 }
 
 .app > main > footer {
@@ -86,26 +100,6 @@ body:has(.app) {
 
 .app > aside > header > img {
   margin: auto;
-}
-
-#share {
-  position:relative; left: 280px
-}
-
-#help {
-  position:relative; left: 305px
-}
-
-#profile {
-  position:relative; left: 330px
-}
-
-#settings {
-  position:relative; left: 355px
-}
-
-#logo {
-  position:relative; left: -280px
 }
 
 #collapseLeft {
