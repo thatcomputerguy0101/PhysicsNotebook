@@ -1,4 +1,4 @@
-var mjs = require("mathjs")
+import mjs from "../mathjs/index.js"
 
 var rules = [
   [Function: simplifyCore] {
@@ -119,11 +119,11 @@ var rules = [
 
 
 export class SimpleManipulation extends Manipulation{
-  public var result;
-  constructor(){};
+  var result;
   constructor(pattern, symbol) {
       this.pattern = pattern;
       this.symbol = symbol
+
   }
 
   public function substitute(EquationState state){
