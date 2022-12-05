@@ -24,8 +24,7 @@
     "mathquill": "^0.10.1-a",
     "peggy": "^2.0.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tex-math-parser": "^2.0.3"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "eslint": "^8.27.0"
