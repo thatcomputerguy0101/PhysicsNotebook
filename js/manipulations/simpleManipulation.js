@@ -118,17 +118,14 @@ var rules = [
 ]
 
 
-export class SimpleManipulation extends Manipulation{
-  var result;
+export class SimpleManipulation extends Manipulation {
   constructor(pattern, symbol) {
-      this.pattern = pattern;
+      this.pattern = pattern
       this.symbol = symbol
-
   }
 
-  public function substitute(EquationState state){
-    result = mjs.simplify(state, rules);
+  substitute(state){
+    var result = mjs.simplify(state, rules)
     return result
   }
-
 }
