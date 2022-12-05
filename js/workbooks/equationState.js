@@ -19,5 +19,8 @@ export class EquationState extends React.Component {
     // Check what manupulations are valid based on the selection here (maybe with a slight delay)
     // Then allow the user to choose one to apply, which creates a new EquationState
     console.log("New selection:", selection)
+    if (selection != null) {
+      console.log("Selection tree:", texmp.parseTex(selection.rawFunction))
+    }
   }
 }

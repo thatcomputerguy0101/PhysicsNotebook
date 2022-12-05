@@ -3,13 +3,13 @@ import html from "../html.js"
 export class Equation extends React.Component {
   static defaultProps = {
     editable: false,
-    onEnter: () => {},
-    onEdit: () => {},
-    onSelectionChange: () => {},
-    onMoveOutOf: () => {},
-    onSelectOutOf: () => {},
-    onUpOutOf: () => {},
-    onDownOutOf: () => {}
+    onEnter: undefined,
+    onEdit: undefined,
+    onSelectionChange: undefined,
+    onMoveOutOf: undefined,
+    onSelectOutOf: undefined,
+    onUpOutOf: undefined,
+    onDownOutOf: undefined
   }
 
   constructor(...args) {

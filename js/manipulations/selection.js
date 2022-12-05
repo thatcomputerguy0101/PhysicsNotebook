@@ -4,9 +4,10 @@ class Selection {
     // Parse latex into start, end, contents
     this.start = selection.indexOf("\\MathQuillSelectionStart")
     this.end = selection.indexOf("\\MathQuillSelectionEnd") - "\\MathQuillSelectionStart".length
-    this.selection = selection.split("\\MathQuillSelectionStart")[1].split("\\MathQuillSelectionEnd")
+    this.selection = selection.match(/\\MathQuillSelectionStart(.*)\\MathQuillSelectionEnd/)[1]
     this.latex = selection.replace(/\\MathQuillSelectionStart|\\MathQuillSelectionEnd/g, "")
     this.raw = selection.replace(/\\MathQuillSelectionStart(.*)\\MathQuillSelectionEnd/g, "\\MathQuillSelection{$1}")
+    this.rawFunction = selection.replace(/\\MathQuillSelectionStart(.*)\\MathQuillSelectionEnd/g, "MathQuillSelection\\left($1\\right)")
   }
 
   static #yetToInit = true
@@ -116,15 +117,15 @@ function getSelection() {
   } finally {
     // Remove selection node around selected contents
     if (selectionNode[MQ.L] == 0) {
-      selectionNode.selection.ends[MQ.L].parent.ends[MQ.L] = selectionNode.ends[MQ.L]
+      selectionNode.selection.ends[MQ.L].parent.ends[MQ.L] = selection.ends[MQ.L]
     } else {
-      selectionNode[MQ.L][MQ.R] = selectionNode.ends[MQ.L]
+      selectionNode[MQ.L][MQ.R] = selection.ends[MQ.L]
     }
 
     if (selectionNode[MQ.R] == 0) {
-      selectionNode.selection.ends[MQ.R].parent.ends[MQ.R] = selectionNode.ends[MQ.R]
+      selectionNode.selection.ends[MQ.R].parent.ends[MQ.R] = selection.ends[MQ.R]
     } else {
-      selectionNode[MQ.R][MQ.L] = selectionNode.ends[MQ.R]
+      selectionNode[MQ.R][MQ.L] = selection.ends[MQ.R]
     }
   }
 
