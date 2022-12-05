@@ -1,4 +1,5 @@
 import html from "./html.js"
+import mjs from "./mathjs/index.js"
 import { Equation } from "./equationPacks/equation.js"
 import { Constant } from "./workbooks/constant.js"
 import { EquationState } from "./workbooks/equationState.js"
@@ -13,7 +14,7 @@ class Test extends React.Component {
       Hello ${this.props.toWhat}!<br/>
       <Equation>${this.props.forces} = m \cdot a</Equation><br/>
       <Constant name="g" value=5/><br/>
-      <EquationState value="F_g=m a_g"/>
+      <EquationState value=${texmp.parseTex("F_g = m a_g")}/>
     </div>`
   }
 }
