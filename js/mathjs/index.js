@@ -1,5 +1,6 @@
 import changeIn from "./changeIn.js"
 import net from "./net.js"
+import modifyRules from "./simplifyRules.js"
 
 export const mjs = math.create()
 export default mjs
@@ -10,3 +11,5 @@ mjs.import({
   changeIn,
   net
 })
+
+modifyRules(mjs)
