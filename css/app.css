@@ -34,7 +34,7 @@ body:has(.app) {
 }
 
 #title {
-  flex-grow: 2;
+  flex-grow: 8;
   margin: 50px;
   text-align: center;
 }
