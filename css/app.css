@@ -20,18 +20,23 @@ body:has(.app) {
   justify-content: space-around;
 }
 
-.app > header > .icons {
+.app > header > .iconsL {
   flex-grow: 1;
-  margin: 10px;
+  margin-left: 0px;
 }
 
-.app > header > .icons > * {
-  margin: 10px;
+.app > header > .iconsL > * {
+  margin-left: 0px;
 }
 
-.app > header > #title {
+.app > header > .iconsR {
+  margin-right: 10px;
+}
+
+#title {
   flex-grow: 2;
-  margin: 10px;
+  margin: 50px;
+  text-align: center;
 }
 
 .app > main > footer {

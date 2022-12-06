@@ -6,11 +6,11 @@ export class App extends React.Component {
     return rhtml`
     <div className="app">
       <header>
-        <div className="icons">
+        <div className="iconsL">
           <img id="logo" src="/icons/logo.svg"/>
         </div>
         <div id="title"> Physics Notebook </div>
-        <div className="icons">
+        <div className="iconsR">
           <img id="share" src="/icons/share.svg"/>
           <img id="help" src="/icons/help.svg"/>
           <img id="profile" src="/icons/profile.svg"/>
