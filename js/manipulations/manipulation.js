@@ -18,9 +18,6 @@ export class Manipulation {
 
   test(selection) {
     const modSel = mjs.simplify(selection, [{l: this.pattern, r: "MathQuillSelectionResult"}])
-    if (/* There exists a SymbolNode (.isSymbolNode == true) where the name is MathQuillSelectionResult */) {
-      return true
-    }
-    return false
+    return !selection.equal(modSel)
   }
 }
