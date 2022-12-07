@@ -1,8 +1,21 @@
 import html from "../html.js"
+import demoWorkbook from "../demo.js"
+import { ConstantBank } from "./constantBank.js"
+import { ProblemSpace } from "../workbooks/problemSpace.js"
+import { Workbook } from "../workbooks/workbook.js"
 
 export class App extends React.Component {
+  constructor(...args) {
+    super(...args)
+    this.state = {
+      workbook: demoWorkbook()
+    }
+  }
+
   render() {
-    let rhtml = html.bind({})
+    let rhtml = html.bind({ ConstantBank, ProblemSpace, Workbook })
+    let activeProblem = this.state.workbook.problems.find(problem => problem.active == true)
+
     return rhtml`
     <div className="app">
       <header>
@@ -23,9 +36,12 @@ export class App extends React.Component {
           <div> Givens </div>
           <img id="collapseLeft" src="/icons/collapse.svg"/>
         </header>
+        <ConstantBank constants=${activeProblem.constants}/>
       </aside>
       <main>
-        <section></section>
+        <section>
+          <ProblemSpace equations=${activeProblem.equations}/>
+        </section>
         <footer>
           <header>
             <div> Equations </div>
@@ -39,6 +55,7 @@ export class App extends React.Component {
           <div> Problems </div>
           <img src="/icons/plus.svg"/>
         </header>
+        <Workbook name=${this.state.workbook.name} problems=${this.state.workbook.problems}/>
       </aside>
     </div>`
   }

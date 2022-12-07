@@ -23,16 +23,19 @@ export class Constant extends React.Component {
 
   render() {
     let rhtml = html.bind({Equation})
+    const name = this.state.name.toTex().replace(/([^\\])~/g, "$1").replace("$~", "")
+    const [value, ...units] = this.state.value.toString().split(" ")
+    const unit = units.join(" ").replace(/^(.+)\/(.+)$/, "\\frac{$1}{$2}")
     if (this.state.editable) {
       return rhtml`
       <Equation onClick=${this.onClick}>
-        \MathQuillMathField{${this.state.name}} = \MathQuillMathField{${this.state.value}} \left[ \MathQuillMathField{${this.state.unit}} \right]
+        \MathQuillMathField{${name}} = \MathQuillMathField{${value}} \left[ \MathQuillMathField{${unit}} \right]
       </Equation>
       `
     } else {
       return rhtml`
       <Equation onClick=${this.onClick}>
-        ${this.state.name} = ${this.state.value} \left[ ${this.state.unit} \right]
+        ${name} = ${value} \left[ ${unit} \right]
       </Equation>
       `
     }

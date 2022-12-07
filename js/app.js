@@ -13,7 +13,7 @@ class Test extends React.Component {
     <div>
       Hello ${this.props.toWhat}!<br/>
       <Equation>${this.props.forces} = m \cdot a</Equation><br/>
-      <Constant name="g" value=5/><br/>
+      <Constant name=${new mjs.SymbolNode("g")} value=${mjs.unit("5 m/s^2")}/><br/>
       <EquationState value=${texmp.parseTex("F_g = m a_g")}/>
     </div>`
   }
