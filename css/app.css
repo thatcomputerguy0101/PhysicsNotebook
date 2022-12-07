@@ -9,34 +9,53 @@ body:has(.app) {
 }
 
 .app > header {
+  position: relative;
   width: 100vw;
   height: 70px;
   background-color: #89eda0;
+  display: table;
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: space-around; */
   text-align: center;
   font-size: 30px;
   font-family: 'Montserrat', sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
 }
 
 .app > header > .iconsL {
-  flex-grow: 1;
-  margin-left: 0px;
+  position: absolute;
+  top: 0;
+  left: 20px;
 }
 
 .app > header > .iconsL > * {
-  margin-left: 0px;
+  margin-left: 0;
 }
 
 .app > header > .iconsR {
-  margin-right: 10px;
+  position: absolute;
+  top: calc((100% - 60px) / 2);
+  right: 20px;
 }
 
-#title {
-  flex-grow: 8;
-  margin: 50px;
-  text-align: center;
+.app > header > .title {
+  display: table-cell;
+  /* flex-grow: 8; */
+  margin: auto;
+  /* text-align: center; */
+  /* height: 100%; */
+  /* line-height: 100%; */
+  vertical-align: middle;
+}
+
+.app > main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.app > main > section {
+  flex-grow: 1;
 }
 
 .app > main > footer {
@@ -80,16 +99,6 @@ body:has(.app) {
   font-size: 20px;
 }
 
-.app > main {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.app > main > section {
-  flex-grow: 1;
-}
-
 .app > aside > header {
   display: flex;
   width: 100%;
@@ -113,8 +122,4 @@ body:has(.app) {
 
 #collapseDown {
   transform: rotate(90deg);
-}
-
-#title {
-  position: relative; left: 5%;
 }
