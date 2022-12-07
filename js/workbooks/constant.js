@@ -28,13 +28,13 @@ export class Constant extends React.Component {
     const unit = units.join(" ").replace(/^(.+)\/(.+)$/, "\\frac{$1}{$2}")
     if (this.state.editable) {
       return rhtml`
-      <Equation onClick=${this.onClick}>
+      <Equation className="constant" onClick=${this.onClick}>
         \MathQuillMathField{${name}} = \MathQuillMathField{${value}} \left[ \MathQuillMathField{${unit}} \right]
       </Equation>
       `
     } else {
       return rhtml`
-      <Equation onClick=${this.onClick}>
+      <Equation className="constant" onClick=${this.onClick}>
         ${name} = ${value} \left[ ${unit} \right]
       </Equation>
       `

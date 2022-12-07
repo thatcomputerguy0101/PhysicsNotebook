@@ -52,6 +52,6 @@ export class Equation extends React.Component {
   }
 
   render() {
-    return html`<span ref=${this.mqRef}>${this.props.children}</span>`
+    return html`<span className=${this.props.className} ref=${this.mqRef}>${this.props.children}</span>`
   }
 }

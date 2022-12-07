@@ -59,4 +59,4 @@ class DynamicTest extends React.Component {
 let test = html`<${DynamicTest} subject="World" newSubject="Physics" delay=2000/>`
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
-root.render(test)
+root.render(html`<${App}/>`)
