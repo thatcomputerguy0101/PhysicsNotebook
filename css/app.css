@@ -6,16 +6,14 @@ body:has(.app) {
   margin: 0;
 }
 
-.app {
-  display: flex;
-  flex-wrap: wrap;
-  height: 100vh;
+#root {
+  --header-height: 70px;
 }
 
-.app > header {
+.header {
   position: relative;
   width: 100vw;
-  height: 70px;
+  height: var(--header-height);
   background-color: #89eda0;
   display: table;
   text-align: center;
@@ -23,29 +21,37 @@ body:has(.app) {
   font-family: 'Montserrat', sans-serif;
 }
 
-.app > header > .iconsL {
+.header > .iconsL {
   position: absolute;
   top: 0;
   left: 20px;
 }
 
-.app > header > .iconsL > * {
+.header > .iconsL > * {
   margin-left: 0;
 }
 
-.app > header > .iconsR {
+.header > .iconsR {
   position: absolute;
   top: calc((100% - 60px) / 2);
   right: 20px;
 }
 
-.app > header > .title {
+.header > .title {
   display: table-cell;
   margin: auto;
   vertical-align: middle;
 }
 
+.app {
+  position: relative;
+  height: calc(100vh - var(--header-height));
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .app > main {
+  height: 100%;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -132,6 +138,7 @@ body:has(.app) {
 
 .equations {
   display: flex;
+  overflow: hidden;
 }
 
 .equationHistory {
@@ -142,7 +149,7 @@ body:has(.app) {
   flex-grow: 1;
   flex-direction: column;
   flex-wrap: nowrap;
-  overflow-y: scroll;
+  overflow-y: auto;
   scroll-behavior: smooth;
 }
 

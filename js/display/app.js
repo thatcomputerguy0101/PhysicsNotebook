@@ -17,31 +17,29 @@ export class App extends React.Component {
     let activeProblem = this.state.workbook.problems.find(problem => problem.active == true)
 
     return rhtml`
+    <header className="header">
+      <div className="iconsL">
+        <img id="logo" src="/icons/logo.svg"/>
+      </div>
+      <div className="title" id="title"> Physics Notebook </div>
+      <div className="iconsR">
+        <img id="share" src="/icons/share.svg"/>
+        <img id="help" src="/icons/help.svg"/>
+        <img id="profile" src="/icons/profile.svg"/>
+        <img id="settings" src="/icons/settings.svg"/>
+      </div>
+    </header>
     <div className="app">
-      <header>
-        <div className="iconsL">
-          <img id="logo" src="/icons/logo.svg"/>
-        </div>
-        <div className="title" id="title"> Physics Notebook </div>
-        <div className="iconsR">
-          <img id="share" src="/icons/share.svg"/>
-          <img id="help" src="/icons/help.svg"/>
-          <img id="profile" src="/icons/profile.svg"/>
-          <img id="settings" src="/icons/settings.svg"/>
-        </div>
-      </header>
       <aside>
         <header>
           <img src="/icons/plus.svg"/>
           <div> Givens </div>
           <img id="collapseLeft" src="/icons/collapse.svg"/>
         </header>
-        <ConstantBank constants=${activeProblem.constants}/>
+        <ConstantBank constants=${activeProblem.constants} onChange=${constants => this.setState({})}/>
       </aside>
       <main>
-        <section>
-          <ProblemSpace equations=${activeProblem.equations}/>
-        </section>
+        <ProblemSpace equations=${activeProblem.equations}/>
         <footer>
           <header>
             <div> Equations </div>
