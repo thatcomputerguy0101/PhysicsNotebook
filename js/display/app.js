@@ -4,6 +4,8 @@ import { ConstantBank } from "./constantBank.js"
 import { ProblemSpace } from "../workbooks/problemSpace.js"
 import { Workbook } from "../workbooks/workbook.js"
 
+const activeProblemCache = Symbol("activeProblemCache")
+
 export class App extends React.Component {
   constructor(...args) {
     super(...args)
@@ -12,9 +14,74 @@ export class App extends React.Component {
     }
   }
 
+  get workbook() {
+    return this.state.workbook
+  }
+
+  set workbook(workbook) {
+    this.setState({workbook})
+  }
+
+  updateActiveProblem(problem) {
+    if (problem == undefined) {
+      problem = this.workbook.problems.find(problem => problem.id == this.workbook.activeProblemId)
+    }
+    this[activeProblemCache] = problem
+  }
+
+  get activeProblem() {
+    return this[activeProblemCache]
+  }
+
+  set activeProblem(problem) {
+    this.setProblem(problem, true)
+    this.updateActiveProblem(problem)
+  }
+
+  setProblem(problem, active=false) {
+    let i = this.workbook.problems.findIndex(oldProblem => oldProblem.id)
+    if (i != -1) {
+      // Problem already exists, so update it
+      this.workbook = {
+        ...this.workbook,
+        problems: this.workbook.problems.slice(0, i).concat([problem], this.workbook.problems.slice(i + 1)),
+        activeProblemId: active ? problem.id : this.workbook.activeProblemId
+      }
+    } else {
+      // Problem has a new id, so add it
+      this.workbook = {
+        ...this.workbook,
+        problems: problems.concat([problem]),
+        activeProblemId: active ? problem.id : this.workbook.activeProblemId
+      }
+    }
+  }
+
+  get constants() {
+    return this.activeProblem.constants
+  }
+
+  set constants(constants) {
+    this.setProblem({
+      ...this.activeProblem,
+      constants: constants
+    })
+  }
+
+  get equations() {
+    return this.activeProblem.equations
+  }
+
+  set equations(equations) {
+    this.setProblem({
+      ...this.activeProblem,
+      constants: constants
+    })
+  }
+
   render() {
     let rhtml = html.bind({ ConstantBank, ProblemSpace, Workbook })
-    let activeProblem = this.state.workbook.problems.find(problem => problem.active == true)
+    this.updateActiveProblem()
 
     return rhtml`
     <header className="header">
@@ -31,15 +98,10 @@ export class App extends React.Component {
     </header>
     <div className="app">
       <aside>
-        <header>
-          <img src="/icons/plus.svg"/>
-          <div> Givens </div>
-          <img id="collapseLeft" src="/icons/collapse.svg"/>
-        </header>
-        <ConstantBank constants=${activeProblem.constants} onChange=${constants => this.setState({})}/>
+        <ConstantBank constants=${this.constants} onChange=${constants => this.constants = constants}/>
       </aside>
       <main>
-        <ProblemSpace equations=${activeProblem.equations}/>
+        <ProblemSpace equations=${this.equations} onChange=${equations => this.equations = equations}/>
         <footer>
           <header>
             <div> Equations </div>
@@ -48,12 +110,10 @@ export class App extends React.Component {
         </footer>
       </main>
       <aside>
-        <header>
-          <img src="/icons/collapse.svg"/>
-          <div> Problems </div>
-          <img src="/icons/plus.svg"/>
-        </header>
-        <Workbook name=${this.state.workbook.name} problems=${this.state.workbook.problems}/>
+        <Workbook name=${this.workbook.name}
+                  problems=${this.workbook.problems}
+                  onSelectProblem=${problem => this.activeProblem = problem}
+                  onProblemsChange=${problems => this.workbook = {...this.workbook, problems: this.problems}}/>
       </aside>
     </div>`
   }
