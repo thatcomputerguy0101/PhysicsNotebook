@@ -29,14 +29,16 @@ export class EquationState extends React.Component {
   render() {
     let rhtml = html.bind({ Equation, ManipulationMenu })
     return rhtml`
-      ${
-        this.state.selection != null
-          ? rhtml`<ManipulationMenu selection=${this.state.selection} onManipulate=${this.onManipulate}/>`
-          : rhtml`<React.Fragment/>`
-      }
-      <Equation className="state" onSelectionChange=${this.handleSelection}>
-        ${this.props.value.toTex().replace(/([^\\])~/g, "$1").replace("$~", "")}
-      </Equation>
+      <div className="state">
+        ${
+          this.state.selection != null
+            ? rhtml`<ManipulationMenu selection=${this.state.selection} onManipulate=${this.onManipulate}/>`
+            : rhtml`<React.Fragment/>`
+        }
+        <Equation onSelectionChange=${this.handleSelection}>
+          ${this.props.value.toTex().replace(/([^\\])~/g, "$1").replace("$~", "")}
+        </Equation>
+      </div>
     `
   }
 
