@@ -6,14 +6,14 @@ export class Manipulation {
 
   constructor() {
     if (this.constructor == Manipulation) {
-      throw new Error("Abstract classes can't be instantiated.");
+      throw new Error("Abstract classes can't be instantiated.")
     } else if (this.substitute == Manipulation.prototype.substitute) {
       throw new Error("Abstract methods must be overridden")
     }
   }
 
   substitute(selection) {
-    throw new Error("Abstract methods can't be called.");
+    throw new Error("Abstract methods can't be called.")
   }
 
   test(selection) {
