@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body:has(.app) {
   margin: 0;
 }
@@ -124,4 +128,50 @@ body:has(.app) {
 
 #collapseDown {
   transform: rotate(90deg);
+}
+
+.equations {
+  display: flex;
+}
+
+.equationHistory {
+  padding: 0 10px;
+  display: flex;
+  height: 100%;
+  flex-shrink: 0;
+  flex-grow: 1;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.equationHistory .state {
+  position: relative;
+  margin: 5px auto;
+  overflow: visible;
+  font-size: 20px !important;
+  color: #888;
+  transition: font-size 0.5s, color 0.5s;
+}
+
+.equationHistory .state:nth-child(2) {
+  font-family: sans-serif;
+  margin-top: auto;
+  padding-top: 15px;
+  cursor: pointer;
+}
+
+.equationHistory .state:nth-last-child(2),
+.equationHistory .state:not(:nth-last-child(2)):hover,
+.equationHistory .state:not(:nth-last-child(2)):focus-within,
+.equationHistory .state.selected {
+  font-size: 24px !important;
+  color: #000;
+}
+
+.equationHistory .spacer {
+  height: 30%;
+  min-height: 70px;
+  flex-shrink: 0;
 }

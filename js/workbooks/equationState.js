@@ -15,7 +15,7 @@ export class EquationState extends React.Component {
   render() {
     let rhtml = html.bind({Equation})
     return rhtml`
-    <Equation onSelectionChange=${this.handleSelection}>
+    <Equation className="state" onSelectionChange=${this.handleSelection}>
       ${this.props.value.toTex().replace(/([^\\])~/g, "$1").replace("$~", "")}
     </Equation>`
   }
