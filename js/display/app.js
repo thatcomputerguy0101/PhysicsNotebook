@@ -51,7 +51,7 @@ export class App extends React.Component {
       // Problem has a new id, so add it
       this.workbook = {
         ...this.workbook,
-        problems: problems.concat([problem]),
+        problems: this.workbook.problems.concat([problem]),
         activeProblemId: active ? problem.id : this.workbook.activeProblemId
       }
     }
