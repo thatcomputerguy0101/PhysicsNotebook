@@ -1,3 +1,4 @@
+// This file monkey patches a Selection API to the MathQuill library
 
 class Selection {
   constructor(selection) {
@@ -55,14 +56,20 @@ class Selection {
       }
     }
 
-    let AbstractMathQuillProto = mathfield.constructor.prototype
-    while (!AbstractMathQuillProto.hasOwnProperty("config")) {
-      AbstractMathQuillProto = Object.getPrototypeOf(AbstractMathQuillProto)
-      if (AbstractMathQuillProto == Object.prototype) {
-        throw new Error("Interal type structure of MathQuill changed, this patch will no longer work")
-      }
+    let APIClasses
+    if (mathfield.__controller.options.handlers == undefined) {
+      MQ.config({handlers: {}})
+      APIClasses = mathfield.__controller.options.handlers.APIClasses
+      delete Object.getPrototypeOf(mathfield.__controller.options).handlers
+    } else {
+      APIClasses = mathfield.__controller.options.handlers.APIClasses
     }
-    AbstractMathQuillProto.getSelection = getSelection
+
+    APIClasses.AbstractMathQuill.prototype.getSelection = getSelection
+
+    APIClasses.MathField.prototype.setHandlers = function setHandlers(handlers) {
+      this.__controller.options.handlers = {fns: handlers, APIClasses}
+    }
 
     this.#yetToInit = false
   }

@@ -1,14 +1,14 @@
 import mjs from "./mathjs/index.js"
 
 export default function demoWorkbook() {
-  return {
+  // This is essentially a database stub while the app is still the primary development focus
+  let data = {
     id: crypto.randomUUID(),
     name: "TestWorkbook",
     problems: [
       {
         id: crypto.randomUUID(),
         name: "TestProblem",
-        active: true,
         constants: [
           {
             id: crypto.randomUUID(),
@@ -31,6 +31,9 @@ export default function demoWorkbook() {
           }
         ]
       }
-    ]
+    ],
+    activeProblemId: null
   }
+  data.activeProblemId = data.problems[0].id
+  return data
 }

@@ -4,7 +4,7 @@ import { ConstantBank } from "./constantBank.js"
 import { ProblemSpace } from "../workbooks/problemSpace.js"
 import { Workbook } from "../workbooks/workbook.js"
 
-const activeProblemCache = new Symbol("activeProblemCache")
+const activeProblemCache = Symbol("activeProblemCache")
 
 export class App extends React.Component {
   constructor(...args) {
@@ -19,19 +19,12 @@ export class App extends React.Component {
   }
 
   set workbook(workbook) {
-    this.state.set({workbook})
-  }
-
-  addProblem(problem) {
-    this.workbook = {
-      ...this.state.workbook,
-      problems: problems.concat([problem])
-    }
+    this.setState({workbook})
   }
 
   updateActiveProblem(problem) {
     if (problem == undefined) {
-      problem = this.state.workbook.problems.find(problem => problem.active == true)
+      problem = this.workbook.problems.find(problem => problem.id == this.workbook.activeProblemId)
     }
     this[activeProblemCache] = problem
   }
@@ -41,23 +34,26 @@ export class App extends React.Component {
   }
 
   set activeProblem(problem) {
-    this.setProblem({...this.activeProblem, active: false})
-    this.setProblem({...problem, active: true})
+    this.setProblem(problem, true)
     this.updateActiveProblem(problem)
   }
 
-  setProblem(problem) {
-    if (problem.active == true && activeProblem.active == true && problem.id != activeProblem.id) {
-      this.activeProblem = problem
-      return
-    }
-    let problems = this.state.workbook
-    this.workbook = {
-      ...this.state.workbook,
-      problems: problems.slice().splice(problems.findIndex(oldProblem => oldProblem.id), 1, problem)
-    }
-    if (problem.active == true) {
-      this.updateActiveProblem()
+  setProblem(problem, active=false) {
+    let i = this.workbook.problems.findIndex(oldProblem => oldProblem.id)
+    if (i != -1) {
+      // Problem already exists, so update it
+      this.workbook = {
+        ...this.workbook,
+        problems: this.workbook.problems.slice(0, i).concat([problem], this.workbook.problems.slice(i + 1)),
+        activeProblemId: active ? problem.id : this.workbook.activeProblemId
+      }
+    } else {
+      // Problem has a new id, so add it
+      this.workbook = {
+        ...this.workbook,
+        problems: problems.concat([problem]),
+        activeProblemId: active ? problem.id : this.workbook.activeProblemId
+      }
     }
   }
 
@@ -102,11 +98,6 @@ export class App extends React.Component {
     </header>
     <div className="app">
       <aside>
-        <header>
-          <img src="/icons/plus.svg"/>
-          <div> Givens </div>
-          <img id="collapseLeft" src="/icons/collapse.svg"/>
-        </header>
         <ConstantBank constants=${this.constants} onChange=${constants => this.constants = constants}/>
       </aside>
       <main>
@@ -119,12 +110,10 @@ export class App extends React.Component {
         </footer>
       </main>
       <aside>
-        <header>
-          <img src="/icons/collapse.svg"/>
-          <div> Problems </div>
-          <img src="/icons/plus.svg"/>
-        </header>
-        <Workbook name=${this.workbook.name} problems=${this.problems} onSelectProblem=${problem => this.activeProblem = problem}/>
+        <Workbook name=${this.workbook.name}
+                  problems=${this.workbook.problems}
+                  onSelectProblem=${problem => this.activeProblem = problem}
+                  onProblemsChange=${problems => this.workbook = {...this.workbook, problems: this.problems}}/>
       </aside>
     </div>`
   }
