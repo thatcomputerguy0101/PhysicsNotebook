@@ -75,7 +75,7 @@ export class App extends React.Component {
   set equations(equations) {
     this.setProblem({
       ...this.activeProblem,
-      constants: constants
+      equations: equations
     })
   }
 

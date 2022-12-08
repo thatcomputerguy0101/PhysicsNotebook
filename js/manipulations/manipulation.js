@@ -17,7 +17,7 @@ export class Manipulation {
   }
 
   test(selection) {
-    const modSel = mjs.simplify(selection, [{l: this.pattern, r: "MathQuillSelectionResult"}])
-    return !selection.equal(modSel)
+    const modSel = mjs.simplify(selection, mjs.simplify.rules.concat({l: this.pattern, r: "MathQuillSelectionResult"}))
+    return !mjs.simplify(selection).equals(modSel)
   }
 }

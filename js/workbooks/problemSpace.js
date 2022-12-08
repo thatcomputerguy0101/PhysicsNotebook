@@ -8,8 +8,8 @@ export class ProblemSpace extends React.Component {
   }
 
   set equations(equations) {
-    if (typeof this.onChange == "function") {
-      this.onChange(equations)
+    if (typeof this.props.onChange == "function") {
+      this.props.onChange(equations)
     }
   }
 

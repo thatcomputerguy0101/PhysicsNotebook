@@ -161,12 +161,12 @@ body:has(.app) {
   transition: font-size 0.5s, color 0.5s;
 }
 
-.equationHistory .state:nth-child(2) {
+/* .equationHistory .state:nth-child(2) {
   font-family: sans-serif;
   margin-top: auto;
   padding-top: 15px;
   cursor: pointer;
-}
+} */
 
 .equationHistory .state:nth-last-child(2),
 .equationHistory .state:not(:nth-last-child(2)):hover,

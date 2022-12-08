@@ -10,7 +10,7 @@ export class SimpleManipulation extends Manipulation {
   }
 
   substitute(state){
-    var result = mjs.simplify(state, rules)
+    var result = mjs.simplify(state, mjs.simplify.rules.concat({l: this.pattern, r: this.result}))
     return result
   }
 }

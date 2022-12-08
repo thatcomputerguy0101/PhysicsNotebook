@@ -1,12 +1,14 @@
 import html from "../html.js"
-import { EquationState } from "../workbooks/equationState.js"
 import { ManipulationItem } from "../manipulations/manipulationItem.js"
 import { Manipulation } from "../manipulations/manipulation.js"
 import { SimpleManipulation } from "../manipulations/simpleManipulation.js"
 
 export class ManipulationMenu extends React.Component {
   static manipulations = [
-    new SimpleManipulation("n1 == n2 + MathQuillSelection(3)", "n1 - n3 == n2", "-")
+    new SimpleManipulation("n1 == n2 + MathQuillSelection(n3)", "n1 - n3 == n2", "-"),
+    new SimpleManipulation("n1 + MathQuillSelection(n2) == n3", "n1 == n3 - n2", "-"),
+    new SimpleManipulation("n1 == n2 - MathQuillSelection(n3)", "n1 + n3 == n2", "+"),
+    new SimpleManipulation("n1 - MathQuillSelection(n2) == n3", "n1 == n3 + n2", "+"),
   ]
 
   constructor(...args) {
@@ -20,24 +22,21 @@ export class ManipulationMenu extends React.Component {
   }
 
   render() {
-    let rhtml = html.bind({EquationState})
-
+    let rhtml = html.bind({ ManipulationItem })
 
     // Process this.props.selection for valid manipulations
     var validManips = this.constructor.manipulations.filter(manip => manip.test(this.props.selection))
 
-    // Show the manipulations that are valid by creating ManipulationItem component in html return
-
-
     if (validManips.length == 0) {
       // No manipulations are valid, return an empty fragment
-      return rhtml`<React.Frament/>`
+      return rhtml`<React.Fragment/>`
     }
 
+    // Show the manipulations that are valid by creating ManipulationItem component in html return
     return rhtml`
-      <div class="manipulations">
+      <div className="manipulations">
         ${validManips.map(manip =>
-            rhtml`<ManipulationItem symbol=${manip.symbol} apply=${() => this.addState(manip.subsitute(this.props.selection))}/>`
+            rhtml`<ManipulationItem symbol=${manip.symbol} apply=${() => this.addState(manip.substitute(this.props.selection))}/>`
         )}
       </div>
     `

@@ -15,8 +15,8 @@ export class Equation extends React.Component {
 
   constructor(...args) {
     super(...args)
-    this.mqRef = React.createRef()
     this.handleSelection = this.handleSelection.bind(this)
+    this.mqRef = React.createRef()
   }
 
   componentDidMount() {
@@ -39,6 +39,10 @@ export class Equation extends React.Component {
         handlers: this.constructor.wrapHandlers(this.props, this.math)
       })
     }
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("selectionchange", this.handleSelection)
   }
 
   static wrapHandlers(handlers, field) {
