@@ -1,4 +1,4 @@
-{
+export default {
   "Kinematics": [
     "v=\\frac{\\Delta d}{\\Delta t}",
     "\\vec{v}=\\frac{\\Delta\\vec{d}}{\\Delta t}",

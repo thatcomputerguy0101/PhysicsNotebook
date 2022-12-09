@@ -2,6 +2,7 @@ import html from "../html.js"
 import demoWorkbook from "../demo.js"
 import { ConstantBank } from "./constantBank.js"
 import { ProblemSpace } from "../workbooks/problemSpace.js"
+import { EquationBank } from "./equationBank.js"
 import { Workbook } from "../workbooks/workbook.js"
 
 const activeProblemCache = Symbol("activeProblemCache")
@@ -80,7 +81,7 @@ export class App extends React.Component {
   }
 
   render() {
-    let rhtml = html.bind({ ConstantBank, ProblemSpace, Workbook })
+    let rhtml = html.bind({ ConstantBank, ProblemSpace, EquationBank, Workbook })
     this.updateActiveProblem()
 
     return rhtml`
@@ -107,6 +108,7 @@ export class App extends React.Component {
             <div> Equations </div>
             <img id="collapseDown" src="/icons/collapse.svg"/>
           </header>
+          <EquationBank/>
         </footer>
       </main>
       <aside>
