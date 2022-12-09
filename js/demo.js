@@ -28,6 +28,12 @@ export default function demoWorkbook() {
               texmp.parseTex("\\Sigma F = m a"),
               texmp.parseTex("\\frac{\\Sigma F}{m} = a")
             ]
+          },
+          {
+            id: crypto.randomUUID(),
+            states: [
+              texmp.parseTex("a^2 + b^2 = c^2")
+            ]
           }
         ]
       }

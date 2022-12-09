@@ -8,7 +8,7 @@ class Selection {
     this.selection = selection.match(/\\MathQuillSelectionStart(.*)\\MathQuillSelectionEnd/)[1]
     this.latex = selection.replace(/\\MathQuillSelectionStart|\\MathQuillSelectionEnd/g, "")
     this.raw = selection.replace(/\\MathQuillSelectionStart(.*)\\MathQuillSelectionEnd/g, "\\MathQuillSelection{$1}")
-    this.rawFunction = selection.replace(/\\MathQuillSelectionStart(.*)\\MathQuillSelectionEnd/g, "MathQuillSelection\\left($1\\right)")
+    this.rawFunction = selection.replace(/\\MathQuillSelectionStart(.*)\\MathQuillSelectionEnd/g, "\\operatorname{MathQuillSelection}\\left($1\\right)")
   }
 
   static #yetToInit = true

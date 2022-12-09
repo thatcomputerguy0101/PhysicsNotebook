@@ -15,8 +15,8 @@ export class Equation extends React.Component {
 
   constructor(...args) {
     super(...args)
-    this.mqRef = React.createRef()
     this.handleSelection = this.handleSelection.bind(this)
+    this.mqRef = React.createRef()
   }
 
   componentDidMount() {
@@ -41,6 +41,10 @@ export class Equation extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    document.removeEventListener("selectionchange", this.handleSelection)
+  }
+
   static wrapHandlers(handlers, field) {
     return {
       enter: handlers.onEnter ? event => handlers.onEnter({...event, target: field}) : undefined,
@@ -63,6 +67,6 @@ export class Equation extends React.Component {
   }
 
   render() {
-    return html`<span className=${this.props.className} ref=${this.mqRef}>${this.props.children}</span>`
+    return html`<span className=${this.props.className} onClick=${this.props.onClick} ref=${this.mqRef}>${this.props.children}</span>`
   }
 }

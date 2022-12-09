@@ -156,23 +156,24 @@ body:has(.app) {
   position: relative;
   margin: 5px auto;
   overflow: visible;
-  font-size: 20px !important;
+  font-size: 18px;
   color: #888;
   transition: font-size 0.5s, color 0.5s;
 }
 
-.equationHistory .state:nth-child(2) {
+/* Restore this if an x is used, and restore :not(:nth-child(2)) to later classes */
+/* .equationHistory .state:nth-child(2) {
   font-family: sans-serif;
   margin-top: auto;
   padding-top: 15px;
   cursor: pointer;
-}
+} */
 
 .equationHistory .state:nth-last-child(2),
-.equationHistory .state:not(:nth-last-child(2)):hover,
-.equationHistory .state:not(:nth-last-child(2)):focus-within,
+.equationHistory .state:hover,
+.equationHistory .state:focus-within,
 .equationHistory .state.selected {
-  font-size: 24px !important;
+  font-size: 22px;
   color: #000;
 }
 
@@ -180,4 +181,26 @@ body:has(.app) {
   height: 30%;
   min-height: 70px;
   flex-shrink: 0;
+}
+
+.manipulations {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border: 2px solid #222223;
+  border-radius: 7px;
+  transform: translateY(-100%);
+  background-color: #fff;
+  text-align: center;
+  font-size: 16px;
+}
+
+.manipulations > * {
+  display: inline-block;
+  margin: 5px;
+  border: 2px solid #888889;
+  border-radius: 10px;
+  padding: 0 5px;
 }
