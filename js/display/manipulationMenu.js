@@ -11,8 +11,15 @@ export class ManipulationMenu extends React.Component {
     new SimpleManipulation("n1 - MathQuillSelection(n2) == n3", "n1 == n3 + n2", "+"),
     new SimpleManipulation("n1 == MathQuillSelection(n2) - n3", "n1 + n3 == n2", "+"),
 
+    new SimpleManipulation("n1 == MathQuillSelection(n2)", "n1 - n2 == 0", "-"), //needs parentheses when moving blocks
+    new SimpleManipulation("MathQuillSelection(n1) == n2", "0 == n2 - n1", "-"),
+    new SimpleManipulation("-MathQuillSelection(-n1) == n2", "n1 == n2", "+"),
+    new SimpleManipulation("n1 == -MathQuillSelection(-n2) ", "n1 == n2", "+"),
+
+
     new SimpleManipulation("n1 == MathQuillSelection(n2) * n3", "n1 / n3 == n2", "/"),
-    new SimpleManipulation("n1 == MathQuillSelection(n2) / n3", "n1 / n3 == n2", "*"), //doesnt work need to look at division
+    new SimpleManipulation("MathQuillSelection(n1) * n2 == n3", "n1 == n3 / n2", "/"),
+    new SimpleManipulation("n1 =MathQuillSelection(frac(n2)(n3))", "n1 / n3 == n2", "*"), //doesnt work need to look at division
 
 
 
