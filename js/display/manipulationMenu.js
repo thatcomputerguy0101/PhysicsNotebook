@@ -9,6 +9,15 @@ export class ManipulationMenu extends React.Component {
     new SimpleManipulation("n1 + MathQuillSelection(n2) == n3", "n1 == n3 - n2", "-"),
     new SimpleManipulation("n1 == n2 - MathQuillSelection(n3)", "n1 + n3 == n2", "+"),
     new SimpleManipulation("n1 - MathQuillSelection(n2) == n3", "n1 == n3 + n2", "+"),
+    new SimpleManipulation("n1 == MathQuillSelection(n2) - n3", "n1 + n3 == n2", "+"),
+
+    new SimpleManipulation("n1 == MathQuillSelection(n2) * n3", "n1 / n3 == n2", "/"),
+    new SimpleManipulation("n1 == MathQuillSelection(n2) / n3", "n1 / n3 == n2", "*"), //doesnt work need to look at division
+
+
+
+
+
   ]
 
   constructor(...args) {
