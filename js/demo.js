@@ -17,8 +17,8 @@ export default function demoWorkbook() {
           },
           {
             id: crypto.randomUUID(),
-            name: new mjs.SymbolNode("d"),
-            value: mjs.unit("7 m"),
+            name: mjs.parse("v[i]"),
+            value: mjs.unit("7 m/s"),
           },
         ],
         equations: [
@@ -27,6 +27,12 @@ export default function demoWorkbook() {
             states: [
               texmp.parseTex("\\Sigma F = m a"),
               texmp.parseTex("\\frac{\\Sigma F}{m} = a")
+            ]
+          },
+          {
+            id: crypto.randomUUID(),
+            states: [
+              texmp.parseTex("\\Delta v = a \\ t")
             ]
           },
           {

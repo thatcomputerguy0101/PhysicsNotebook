@@ -18,7 +18,7 @@ export class EquationHistory extends React.Component {
       <div className="equationHistory">
         <div className="spacer"/>
         ${this.props.states.map((state, index) =>
-            rhtml`<EquationState key=${index} value=${state} onManipulate=${newState => this.addState(newState, index)}/>`
+            rhtml`<EquationState key=${state.toString()} value=${state} onManipulate=${newState => this.addState(newState, index)}/>`
         )}
         <div className="spacer"/>
       </div>
