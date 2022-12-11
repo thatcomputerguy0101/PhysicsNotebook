@@ -3,7 +3,7 @@ import { ManipulationItem } from "../manipulations/manipulationItem.js"
 import algebra from "../manipulations/algebra.js"
 
 export class ManipulationMenu extends React.Component {
-  manipulations = algebra
+  static manipulations = algebra
 
   constructor(...args) {
     super(...args)
