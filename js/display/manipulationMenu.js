@@ -5,25 +5,30 @@ import { SimpleManipulation } from "../manipulations/simpleManipulation.js"
 
 export class ManipulationMenu extends React.Component {
   static manipulations = [
-    new SimpleManipulation("n1 == n2 + MathQuillSelection(n3)", "n1 - n3 == n2", "-"),
-    new SimpleManipulation("n1 + MathQuillSelection(n2) == n3", "n1 == n3 - n2", "-"),
-    new SimpleManipulation("n1 == n2 - MathQuillSelection(n3)", "n1 + n3 == n2", "+"),
-    new SimpleManipulation("n1 - MathQuillSelection(n2) == n3", "n1 == n3 + n2", "+"),
-    new SimpleManipulation("n1 == MathQuillSelection(n2) - n3", "n1 + n3 == n2", "+"),
-    
-    new SimpleManipulation("n1 == MathQuillSelection(n2)", "n1 - n2 == 0", "-"), //needs parentheses when moving blocks
-    new SimpleManipulation("MathQuillSelection(n1) == n2", "0 == n2 - n1", "-"),
-    new SimpleManipulation("-MathQuillSelection(-n1) == n2", "n1 == n2", "+"),
-    new SimpleManipulation("n1 == -MathQuillSelection(-n2) ", "n1 == n2", "+"),
+    new SimpleManipulation([
+      {l: "n1 == n2 - MathQuillSelection(n3)", r: "n1 + n3 == n2"},
+      {l: "n1 - MathQuillSelection(n2) == n3", r: "n1 == n3 + n2"},
+      {l: "n1 == MathQuillSelection(n2) - n3", r: "n1 + n3 == n2"},
+      {l: "MathQuillSelection(-n1) == n2",     r: "n1 == n2"},
+      {l: "n1 == MathQuillSelection(-n2) ",    r: "n1 == n2"},
+    ], "+"),
 
-    new SimpleManipulation("n1 == n2 * MathQuillSelection(n3)", "n1 / n3 == n2", "/"),
-    new SimpleManipulation("n1 * MathQuillSelection(n2) == n3", "n1 == n3 / n2", "/"),
-    new SimpleManipulation("n1 == n2 / MathQuillSelection(n3)", "n1 * n3 == n2", "*"),
-    new SimpleManipulation("n1 / MathQuillSelection(n2) == n3", "n1 == n2 * n3", "*"),
+    new SimpleManipulation([
+      {l: "n1 == n2 + MathQuillSelection(n3)", r: "n1 - n3 == n2"},
+      {l: "n1 + MathQuillSelection(n2) == n3", r: "n1 == n3 - n2"},
+      {l: "n1 == MathQuillSelection(n2)",      r: "n1 - n2 == 0"},
+      {l: "MathQuillSelection(n1) == n2",      r: "0 == n2 - n1"},
+    ], "-"),
 
+    new SimpleManipulation([
+      {l: "n1 / MathQuillSelection(n2) == n3", r: "n1 == n2 * n3"},
+      {l: "n1 == n2 / MathQuillSelection(n3)", r: "n1 * n3 == n2"},
+    ], "*"),
 
-
-
+    new SimpleManipulation([
+      {l: "n1 == n2 * MathQuillSelection(n3)", r: "n1 / n3 == n2"},
+      {l: "n1 * MathQuillSelection(n2) == n3", r: "n1 == n3 / n2"},
+    ], "/")
 
   ]
 

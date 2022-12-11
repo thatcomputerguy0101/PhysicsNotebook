@@ -1,8 +1,9 @@
 import mjs from "../mathjs/index.js"
 
 export class Manipulation {
-  pattern = ""
+  patterns = ""
   symbol
+  replacements
 
   constructor() {
     if (this.constructor == Manipulation) {
@@ -17,7 +18,7 @@ export class Manipulation {
   }
 
   test(selection) {
-    const modSel = mjs.simplify(selection, mjs.simplify.rules.concat({l: this.pattern, r: "MathQuillSelectionResult"}))
+    const modSel = mjs.simplify(selection, mjs.simplify.rules.concat(this.replacements))
     return !mjs.simplify(selection).equals(modSel)
   }
 }
