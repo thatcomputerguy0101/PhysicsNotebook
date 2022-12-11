@@ -47,6 +47,14 @@ export class EquationState extends React.Component {
     if (selection == null) {
       this.setState({selection: null})
     } else {
+      // Check for split infix operators
+      if (
+        /(?:[^([|{]|^)\\MathQuillSelectionStart(?:\+|-|\*|\/|\^|_)/.test(selection.rawFlags) // NOTE: Use lookbehinds once supported in Safari
+        || /(?:\+|-|\*|\/|\^|_)\\MathQuillSelectionEnd(?!\\right|\})/.test(selection.rawFlags)
+      ) {
+        console.log("Skipped selection due to bad infix operator")
+        return // TODO: Expand selection to confuse user less
+      }
       try {
         this.setState({selection: texmp.parseTex(selection.rawFunction)})
       } catch (error) {
