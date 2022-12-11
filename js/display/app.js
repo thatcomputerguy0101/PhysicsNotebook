@@ -108,7 +108,7 @@ export class App extends React.Component {
             <div> Equations </div>
             <img id="collapseDown" src="/icons/collapse.svg"/>
           </header>
-          <EquationBank/>
+          <EquationBank onCreate=${equation => this.equations = this.equations.concat({id: crypto.randomUUID(), states: [equation]})}/>
         </footer>
       </main>
       <aside>
