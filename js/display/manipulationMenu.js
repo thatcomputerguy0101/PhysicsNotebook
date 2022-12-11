@@ -1,36 +1,9 @@
 import html from "../html.js"
 import { ManipulationItem } from "../manipulations/manipulationItem.js"
-import { Manipulation } from "../manipulations/manipulation.js"
-import { SimpleManipulation } from "../manipulations/simpleManipulation.js"
+import algebra from "../manipulations/algebra.js"
 
 export class ManipulationMenu extends React.Component {
-  static manipulations = [
-    new SimpleManipulation([
-      {l: "n1 == n2 - MathQuillSelection(n3)", r: "n1 + n3 == n2"},
-      {l: "n1 - MathQuillSelection(n2) == n3", r: "n1 == n3 + n2"},
-      {l: "n1 == MathQuillSelection(n2) - n3", r: "n1 + n3 == n2"},
-      {l: "MathQuillSelection(-n1) == n2",     r: "n1 == n2"},
-      {l: "n1 == MathQuillSelection(-n2) ",    r: "n1 == n2"},
-    ], "+"),
-
-    new SimpleManipulation([
-      {l: "n1 == n2 + MathQuillSelection(n3)", r: "n1 - n3 == n2"},
-      {l: "n1 + MathQuillSelection(n2) == n3", r: "n1 == n3 - n2"},
-      {l: "n1 == MathQuillSelection(n2)",      r: "n1 - n2 == 0"},
-      {l: "MathQuillSelection(n1) == n2",      r: "0 == n2 - n1"},
-    ], "-"),
-
-    new SimpleManipulation([
-      {l: "n1 / MathQuillSelection(n2) == n3", r: "n1 == n2 * n3"},
-      {l: "n1 == n2 / MathQuillSelection(n3)", r: "n1 * n3 == n2"},
-    ], "*"),
-
-    new SimpleManipulation([
-      {l: "n1 == n2 * MathQuillSelection(n3)", r: "n1 / n3 == n2"},
-      {l: "n1 * MathQuillSelection(n2) == n3", r: "n1 == n3 / n2"},
-    ], "/")
-
-  ]
+  manipulations = algebra
 
   constructor(...args) {
     super(...args)
