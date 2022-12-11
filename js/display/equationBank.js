@@ -29,20 +29,23 @@ export class EquationBank extends React.Component {
   render() {
     let rhtml = html.bind({ Equation })
     return html`
-    ${
+      <div className="equationBank">
+      ${
       this.pack.categories.map((category, i) => html`
-        <div key=${i} className="category" onClick=${() => this.toggleCategory(i)}>
+        <div key=${"cat" + i} className="categoryHeader" onClick=${() => this.toggleCategory(i)}>
           ${category.name}
         </div>
         ${
           this.state.categoriesOpen[i]
-            ? html`<div key=${"cat" + i}>${category.equations.map((equation, j) => rhtml`
-              <div key=${j}><Equation>${equation}</Equation></div>
+            ? html`<div key=${"cat" + i + "con"} className="category">${category.equations.map((equation, j) => rhtml`
+              <Equation>${mjs.fixTex(equation.toTex())}</Equation>
             `)}</div>`
-            : html`<React.Fragment key=${"cat" + i}/>`
+            : html`<React.Fragment key=${"cat" + i + "con"}/>`
         }
       `)
-    }
+      }
+      </div>
     `
+    /**/
   }
 }

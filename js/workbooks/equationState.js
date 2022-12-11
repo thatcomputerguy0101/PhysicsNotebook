@@ -36,7 +36,7 @@ export class EquationState extends React.Component {
             : rhtml`<React.Fragment/>`
         }
         <Equation onSelectionChange=${this.handleSelection}>
-          ${this.props.value.toTex().replace(/([^\\])~/g, "$1").replaceAll("$~", "").replace(/\\Sigma\s*\\cdot/g, "\\Sigma").replaceAll(/\\Delta\s*\\cdot/g, "\\Delta")}
+          ${mjs.fixTex(this.props.value.toTex())}
         </Equation>
       </div>
     `

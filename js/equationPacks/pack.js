@@ -14,7 +14,7 @@ class Category {
     if (!Array.isArray(json)) {
       throw new TypeError(`Provided object for ${category} is not an array`)
     }
-    return new Category(json.map(equation => {
+    return new Category(name, json.map(equation => {
       try {
         return texmp.parseTex(equation.replace(/\\vec/g, ""))
       } catch (error) {
@@ -38,6 +38,7 @@ export class EquationPack {
     }
     let parsedJson = []
     for (const category of Object.keys(json)) {
+      console.log(category)
       parsedJson.push(Category.fromObject(category, json[category]))
     }
     return new EquationPack(parsedJson)

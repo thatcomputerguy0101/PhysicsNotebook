@@ -89,7 +89,7 @@ export default {
   ],
   "2D Geometry": [
     "C=\\pi d=2\\pi r",
-    "A=\\pi r^2=\\frac{\\pid^2}{4}",
+    "A=\\pi r^2=\\frac{\\pi d^2}{4}",
     "A=lw",
     "A=bh \\text{ (Parallelogram)}",
     "A=\\frac{1}{2}bh \\text{ (Triangle)}",
