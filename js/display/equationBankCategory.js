@@ -1,0 +1,23 @@
+import html from "../html.js"
+import mjs from "../mathjs/index.js"
+import { Equation } from "../equationPacks/equation.js"
+
+export class EquationBankCategory extends React.Component {
+  render() {
+    let rhtml = html.bind({ Equation })
+    return html`
+      <div>
+        <div className=${"categoryHeader" + (this.props.open ? " open" : "")} onClick=${this.props.onClick}>
+          ${this.props.name}
+        </div>
+        ${
+          this.props.open
+            ? html`<div className="category">${this.props.equations.map(equation => rhtml`
+              <Equation onClick=${() => this.createEquation(equation)}>${mjs.fixTex(equation.toTex())}</Equation>
+            `)}</div>`
+            : html`<React.Fragment/>`
+        }
+      </div>
+    `
+  }
+}

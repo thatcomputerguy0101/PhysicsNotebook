@@ -64,6 +64,8 @@ body:has(.app) {
 }
 
 .app > main > footer {
+  --header-height: 30px;
+
   height: 210px;
   border-top: 4px solid #6ac67e;
   font-size: 20px;
@@ -73,10 +75,12 @@ body:has(.app) {
 
 .app > main > footer > header {
   position: sticky;
+  top: 0;
   display: flex;
   width: 100%;
-  height: 30px;
+  height: var(--header-height);
   background-color: #d3ffe6;
+  z-index: 2;
 }
 
 .app > main > footer > header > div {
@@ -86,6 +90,8 @@ body:has(.app) {
 }
 
 .categoryHeader {
+  position: sticky;
+  top: var(--header-height);
   background-color: #f0f9f2;
 }
 
@@ -128,6 +134,8 @@ body:has(.app) {
 }
 
 .app > aside > header {
+  position: sticky;
+  top: 0;
   font-family: 'Montserrat', sans-serif;
   font-size: 20px;
   display: flex;

@@ -38,7 +38,6 @@ export class EquationPack {
     }
     let parsedJson = []
     for (const category of Object.keys(json)) {
-      console.log(category)
       parsedJson.push(Category.fromObject(category, json[category]))
     }
     return new EquationPack(parsedJson)

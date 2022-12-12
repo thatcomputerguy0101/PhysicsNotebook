@@ -1,6 +1,5 @@
 import html from "../html.js"
-import mjs from "../mathjs/index.js"
-import { Equation } from "../equationPacks/equation.js"
+import { EquationBankCategory as Category } from "./equationBankCategory.js"
 import { EquationPack } from "../equationPacks/pack.js"
 
 export class EquationBank extends React.Component {
@@ -33,21 +32,15 @@ export class EquationBank extends React.Component {
   }
 
   render() {
-    let rhtml = html.bind({ Equation })
+    let rhtml = html.bind({ Category })
     return html`
       <div className="equationBank">
       ${
-      this.pack.categories.map((category, i) => html`
-        <div key=${"cat" + i} className=${"categoryHeader" + (this.state.categoriesOpen[i] ? " open" : "")} onClick=${() => this.toggleCategory(i)}>
-          ${category.name}
-        </div>
-        ${
-          this.state.categoriesOpen[i]
-            ? html`<div key=${"cat" + i + "con"} className="category">${category.equations.map((equation, j) => rhtml`
-              <Equation onClick=${() => this.createEquation(equation)}>${mjs.fixTex(equation.toTex())}</Equation>
-            `)}</div>`
-            : html`<React.Fragment key=${"cat" + i + "con"}/>`
-        }
+      this.pack.categories.map((category, i) => rhtml`
+        <Category name=${category.name}
+                  equations=${category.equations}
+                  open=${this.state.categoriesOpen[i]}
+                  onClick=${() => this.toggleCategory(i)}/>
       `)
       }
       </div>
