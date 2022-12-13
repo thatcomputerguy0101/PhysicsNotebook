@@ -270,6 +270,7 @@ body:has(.app) {
 
 .helpMenu > footer {
   padding: 5px;
+  text-align: center;
 }
 
 .helpMenu > footer > button {
