@@ -4,7 +4,7 @@ export class HelpMenu extends React.Component {
   static pages = [
     {
       image: "../steps/Step1.png",
-      content: "1. Go into the ‘Givens’ menu on the left side and click on the ‘+’ button to add your givens in.",
+      content: "1. Go into the ‘Givens’ menu on the left side and click on the ‘+’ button to add your givens in."
     },
     {
       image: "../steps/Step2.png",
@@ -77,6 +77,10 @@ export class HelpMenu extends React.Component {
     }
   }
 
+  stop(event) {
+    event.stopPropagation()
+  }
+
   close() {
     if (typeof this.props.onClose == "function") {
       this.props.onClose()
@@ -90,7 +94,7 @@ export class HelpMenu extends React.Component {
                 onPointerMove=${this.onPointerMove}
                 onPointerUp=${this.onPointerUp}>
           PhysicsNotebook Help
-          <span className="close" onClick=${this.close}>⨯</span>
+          <div className="close" onPointerDown=${this.stop} onClick=${this.close}>⨯</div>
         </header>
         <main>
           <div>
