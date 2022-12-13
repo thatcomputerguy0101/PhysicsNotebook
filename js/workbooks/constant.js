@@ -56,7 +56,6 @@ export class Constant extends React.Component {
 
   render() {
     let rhtml = html.bind({Equation})
-    const name = this.props.name.toTex().replace(/([^\\])~/g, "$1").replace("$~", "")
     const [value, ...units] = this.props.value.toString().split(" ")
     const unit = units.join(" ").replace(/^(?:\((.+)\)|(.+))\/(?:\((.+)\)|(.+))$/, "\\frac{$1$2}{$3$4}")
     if (this.state.editable) {
@@ -68,7 +67,7 @@ export class Constant extends React.Component {
     } else {
       return rhtml`
       <Equation className="constant" onClick=${this.onClick}>
-        ${name} = ${value} \left[ \mathrm {${unit}} \right]
+        ${this.name} = ${value} \left[ \mathrm {${unit}} \right]
       </Equation>
       `
     }
