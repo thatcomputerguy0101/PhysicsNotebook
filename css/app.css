@@ -251,3 +251,25 @@ body:has(.app) {
   height: min(400px, 80vh);
   background-color: #fff;
 }
+
+.helpMenu header {
+  position: relative;
+}
+
+.helpMenu .close {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  height: 1em;
+  width: 1em;
+  margin: auto;
+  border: 2px solid #660000;
+  color: #660000;
+  text-align: center;
+  line-height: 0.6em;
+  border-radius: 0.3em;
+  user-select: none;
+  cursor: pointer;
+}

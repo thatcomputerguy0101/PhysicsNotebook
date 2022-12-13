@@ -66,7 +66,7 @@ export class HelpMenu extends React.Component {
                 onPointerMove=${this.onPointerMove}
                 onPointerUp=${this.onPointerUp}>
           PhysicsNotebook Help
-          <span onClick=${this.close}>⨯</span>
+          <span className="close" onClick=${this.close}>⨯</span>
         </header>
         <main>
           <img src=${this.constructor.pages[this.state.page].image}/>
