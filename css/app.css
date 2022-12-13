@@ -250,10 +250,28 @@ body:has(.app) {
   width: min(500px, 100vw);
   height: min(400px, 80vh);
   background-color: #fff;
+  border: 4px solid #4f905d;
+  display: flex;
+  flex-direction: column;
 }
 
 .helpMenu header {
   position: relative;
+  background-color: #4f905d;
+  margin: -5px;
+}
+
+.helpMenu > main {
+  padding: 5px;
+  flex-grow: 1;
+}
+
+.helpMenu > footer {
+  padding: 5px;
+}
+
+.helpMenu > footer > button {
+  margin: 4px;
 }
 
 .helpMenu .close {
@@ -272,4 +290,14 @@ body:has(.app) {
   border-radius: 0.3em;
   user-select: none;
   cursor: pointer;
+}
+
+.helpMenu .stepImage {
+  max-width: 65%;
+  max-height: 65%;
+}
+
+.helpMenu > main > div {
+  text-align: center;
+  margin: 15px;
 }
