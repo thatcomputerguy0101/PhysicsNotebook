@@ -3,6 +3,12 @@ import mjs from "../mathjs/index.js"
 import { Equation } from "../equationPacks/equation.js"
 
 export class EquationBankCategory extends React.Component {
+  createEquation(equation) {
+    if (typeof this.props.onCreate == "function") {
+      this.props.onCreate(equation)
+    }
+  }
+
   render() {
     let rhtml = html.bind({ Equation })
     return html`

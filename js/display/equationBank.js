@@ -40,7 +40,8 @@ export class EquationBank extends React.Component {
         <Category name=${category.name}
                   equations=${category.equations}
                   open=${this.state.categoriesOpen[i]}
-                  onClick=${() => this.toggleCategory(i)}/>
+                  onClick=${() => this.toggleCategory(i)}
+                  onCreate=${equation => this.createEquation(equation)}/>
       `)
       }
       </div>
