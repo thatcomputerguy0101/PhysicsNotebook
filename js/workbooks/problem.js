@@ -1,7 +1,7 @@
 import html from "../html.js"
 
 export class Problem extends React.Component {
-  render(){
+  render() {
     return html`
       <div className="problem" onClick=${null}>
         ${this.props.name}
