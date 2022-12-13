@@ -248,17 +248,19 @@ body:has(.app) {
   z-index: 5;
   position: absolute;
   width: min(500px, 100vw);
-  height: min(420px, 80vh);
+  height: min(440px, 80vh);
   background-color: #f0f9f2;
   border: 4px solid #4f905d;
   display: flex;
   flex-direction: column;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .helpMenu header {
   position: relative;
   background-color: #4f905d;
   padding: 5px;
+  color: #FFF;
 }
 
 .helpMenu > main {
