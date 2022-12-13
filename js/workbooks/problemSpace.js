@@ -2,7 +2,6 @@ import html from "../html.js"
 import { EquationHistory } from "./equationHistory.js"
 
 export class ProblemSpace extends React.Component {
-
   get equations() {
     return this.props.equations
   }
