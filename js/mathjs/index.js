@@ -6,12 +6,13 @@ import fixTex from "./fixTex.js"
 export const mjs = math.create()
 export default mjs
 
-
-// TODO: Promote changeIn and net to operators (instead of functions) for better parentheses handling
-mjs.import({
+const imports = {
   changeIn,
-  net
-})
+  net,
+}
+
+mjs.import(imports)
+texmp.import(imports)
 
 mjs.fixTex = fixTex
 
