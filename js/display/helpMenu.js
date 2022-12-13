@@ -3,8 +3,8 @@ import html from "../html.js"
 export class HelpMenu extends React.Component {
   static pages = [
     {
-      image: "/images/help0.png",
-      content: "This is totally a helpful menu"
+      image: "../steps/Step1.png",
+      content: "1. Go into the ‘Givens’ menu on the left side and click on the ‘+’ button to add your givens in."
     }
   ]
 
