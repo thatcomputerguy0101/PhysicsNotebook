@@ -4,6 +4,7 @@ import { ConstantBank } from "./constantBank.js"
 import { ProblemSpace } from "../workbooks/problemSpace.js"
 import { EquationBank } from "./equationBank.js"
 import { Workbook } from "../workbooks/workbook.js"
+import { HelpMenu } from "./helpMenu.js"
 
 const activeProblemCache = Symbol("activeProblemCache")
 
@@ -81,7 +82,7 @@ export class App extends React.Component {
   }
 
   render() {
-    let rhtml = html.bind({ ConstantBank, ProblemSpace, EquationBank, Workbook })
+    let rhtml = html.bind({ ConstantBank, ProblemSpace, EquationBank, Workbook, HelpMenu })
     this.updateActiveProblem()
 
     return rhtml`
@@ -92,11 +93,16 @@ export class App extends React.Component {
       <div className="title" id="title"> Physics Notebook </div>
       <div className="iconsR">
         <img id="share" src="/icons/share.svg"/>
-        <img id="help" src="/icons/help.svg"/>
+        <img id="help" src="/icons/help.svg" onClick=${() => this.setState({showHelp: true})}/>
         <img id="profile" src="/icons/profile.svg"/>
         <img id="settings" src="/icons/settings.svg"/>
       </div>
     </header>
+    ${
+      this.state.showHelp
+        ? rhtml`<HelpMenu onClose=${() => this.setState({showHelp: false})}/>`
+        : html`<React.Fragment/>`
+    }
     <div className="app">
       <aside>
         <ConstantBank constants=${this.constants} onChange=${constants => this.constants = constants}/>
