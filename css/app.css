@@ -258,7 +258,7 @@ body:has(.app) {
 .helpMenu header {
   position: relative;
   background-color: #4f905d;
-  margin: -5px;
+  padding: 5px;
 }
 
 .helpMenu > main {
@@ -277,7 +277,7 @@ body:has(.app) {
 .helpMenu .close {
   display: inline-block;
   position: absolute;
-  right: 0;
+  right: 5px;
   top: 0;
   bottom: 0;
   height: 1em;

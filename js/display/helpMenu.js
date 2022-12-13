@@ -72,8 +72,8 @@ export class HelpMenu extends React.Component {
   }
 
   prevPage() {
-    if (this.state.page > this.constructor.pages.length) {
-      this.setState(state => ({page: state.page + 1}))
+    if (this.state.page < this.constructor.pages.length) {
+      this.setState(state => ({page: state.page - 1}))
     }
   }
 
