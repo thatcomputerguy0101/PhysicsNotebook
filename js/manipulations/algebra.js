@@ -59,10 +59,6 @@ export default [
     {l:"n1 == MathQuillSelection(log(n2,n3))", r:"n3^n1 == n2" },
     {l:"log(MathQuillSelection(n2),n3) == n1", r:"n2 == n3^n1" },
     {l:"MathQuillSelection(log(n2,n3)) == n1", r:"n2 == n3^n1" },
-
-
-
-
   ], "x^2"),
 
   new SimpleManipulation([

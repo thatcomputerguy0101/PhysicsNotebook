@@ -1,6 +1,7 @@
 import html from "../html.js"
 import mjs from "../../mathjs/index.js"
 import { Constant } from "./constant.js"
+import { ConstantData } from "../../files/constantData.js"
 
 export class ConstantBank extends React.Component {
   constructor(...args) {
@@ -24,11 +25,7 @@ export class ConstantBank extends React.Component {
   }
 
   addConstant() {
-    this.setConstant({
-      id: crypto.randomUUID(),
-      name: new mjs.SymbolNode(""),
-      value: mjs.unit("")
-    })
+    this.setConstant(new ConstantData())
   }
 
   get constants() {

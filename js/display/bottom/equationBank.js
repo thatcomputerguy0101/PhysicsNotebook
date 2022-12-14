@@ -1,6 +1,7 @@
 import html from "../html.js"
 import { EquationBankCategory as Category } from "./equationBankCategory.js"
 import { EquationPack } from "../../equationPacks/pack.js"
+import { EquationData } from "../../files/equationData.js"
 
 export class EquationBank extends React.Component {
   static defaultProps = {
@@ -20,7 +21,7 @@ export class EquationBank extends React.Component {
 
   createEquation(equation) {
     if (typeof this.props.onCreate == "function") {
-      this.props.onCreate(equation)
+      this.props.onCreate(new EquationData(equation))
     }
   }
 
