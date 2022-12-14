@@ -1,4 +1,4 @@
-import { ConstantData } from "./constnatData.js"
+import { ConstantData } from "./constantData.js"
 
 export class ProblemData {
   constructor(name, equations, constants, id) {

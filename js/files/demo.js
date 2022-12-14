@@ -1,4 +1,8 @@
 import mjs from "../mathjs/index.js"
+import { WorkbookData } from "./workbookData.js"
+import { ProblemData } from "./problemData.js"
+import { EquationData } from "./equationData.js"
+import { ConstantData } from "./constantData.js"
 
 export default function demoWorkbook() {
   // This is essentially a database stub while the app's features is still the primary development focus
