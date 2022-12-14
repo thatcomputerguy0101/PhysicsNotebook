@@ -1,3 +1,4 @@
+
 export class ConstantData {
   constructor(name, value, id) {
     this.name = name ?? new mathjs.SymbolNode("")
