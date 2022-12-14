@@ -1,6 +1,7 @@
+
 export class EquationData {
-  constructor(id, states) {
+  constructor(states, id) {
+    this.states = states ?? []
     this.id = id ?? crypto.randomUUID()
-    this.states = states
   }
 }
