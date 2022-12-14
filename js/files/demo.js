@@ -14,37 +14,20 @@ export default function demoWorkbook() {
         id: crypto.randomUUID(),
         name: "TestProblem",
         constants: [
-          {
-            id: crypto.randomUUID(),
-            name: new mjs.SymbolNode("a"),
-            value: mjs.unit("5 m/s^2"),
-          },
-          {
-            id: crypto.randomUUID(),
-            name: mjs.parse("v[i]"),
-            value: mjs.unit("7 m/s"),
-          },
+            new ConstantData(new mjs.SymbolNode("a"), mjs.unit("5 m/s^2")),
+            new ConstantData(mjs.parse("v[i]"), mjs.unit("7 m/s")),
         ],
         equations: [
-          {
-            id: crypto.randomUUID(),
-            states: [
+            new EquationData([
               texmp.parseTex("\\Sigma F = m a"),
-              texmp.parseTex("\\frac{\\Sigma F}{m} = a")
-            ]
-          },
-          {
-            id: crypto.randomUUID(),
-            states: [
+              texmp.parseTex("\\frac{\\Sigma F}{m} = a"),
+            ]),
+            new EquationData([
               texmp.parseTex("\\Delta v = a \\ t")
-            ]
-          },
-          {
-            id: crypto.randomUUID(),
-            states: [
+            ]),
+            new EquationData([
               texmp.parseTex("a^2 + b^2 = c^2")
-            ]
-          }
+            ]),
         ]
       }
     ],
