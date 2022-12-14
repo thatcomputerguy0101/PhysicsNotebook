@@ -1,9 +1,9 @@
 import html from "./html.js"
 import demoWorkbook from "../files/demo.js"
 import { ConstantBank } from "./left/constantBank.js"
-import { ProblemSpace } from "./center/workbooks/problemSpace.js"
+import { ProblemSpace } from "./center/problemSpace.js"
 import { EquationBank } from "./bottom/equationBank.js"
-import { Workbook } from "./right/workbooks/workbook.js"
+import { Workbook } from "./right/workbook.js"
 import { HelpMenu } from "./overlay/helpMenu.js"
 
 const activeProblemCache = Symbol("activeProblemCache")

@@ -1,4 +1,4 @@
-import html from "../html.js"
+import html from "../display/html.js"
 
 export class complexManipulation extends Manipulation{
   constructor(pattern, symbol) {

@@ -1,4 +1,3 @@
-import html from "../html.js"
 import physics from "./packs/physics.js"
 
 class Category {

@@ -1,4 +1,4 @@
-import mjs from "./mathjs/index.js"
+import mjs from "../mathjs/index.js"
 
 export default function demoWorkbook() {
   // This is essentially a database stub while the app's features is still the primary development focus
