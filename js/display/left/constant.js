@@ -1,6 +1,6 @@
 import html from "../html.js"
-import mjs from "../mathjs/index.js"
-import { Equation } from "../equationPacks/equation.js"
+import mjs from "../../mathjs/index.js"
+import { Equation } from "../equation.js"
 
 export class Constant extends React.Component {
   static defaultProps = {

@@ -1,6 +1,6 @@
 import html from "../html.js"
-import { ManipulationItem } from "../manipulations/manipulationItem.js"
-import algebra from "../manipulations/algebra.js"
+import { ManipulationItem } from "./manipulationItem.js"
+import algebra from "../../manipulations/algebra.js"
 
 export class ManipulationMenu extends React.Component {
   static manipulations = algebra

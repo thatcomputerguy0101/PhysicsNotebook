@@ -1,6 +1,6 @@
 import html from "../html.js"
-import mjs from "../mathjs/index.js"
-import { Constant } from "../workbooks/constant.js"
+import mjs from "../../mathjs/index.js"
+import { Constant } from "./constant.js"
 
 export class ConstantBank extends React.Component {
   constructor(...args) {

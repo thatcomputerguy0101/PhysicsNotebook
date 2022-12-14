@@ -1,5 +1,5 @@
 import html from "../html.js"
-import { Equation } from "../equationPacks/equation.js"
+import { Equation } from "../equation.js"
 
 export class ManipulationItem extends React.Component {
   render() {

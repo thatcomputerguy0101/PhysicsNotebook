@@ -1,10 +1,10 @@
-import html from "../html.js"
-import demoWorkbook from "../demo.js"
-import { ConstantBank } from "./constantBank.js"
-import { ProblemSpace } from "../workbooks/problemSpace.js"
-import { EquationBank } from "./equationBank.js"
-import { Workbook } from "../workbooks/workbook.js"
-import { HelpMenu } from "./helpMenu.js"
+import html from "./html.js"
+import demoWorkbook from "../files/demo.js"
+import { ConstantBank } from "./left/constantBank.js"
+import { ProblemSpace } from "./center/workbooks/problemSpace.js"
+import { EquationBank } from "./bottom/equationBank.js"
+import { Workbook } from "./right/workbooks/workbook.js"
+import { HelpMenu } from "./overlay/helpMenu.js"
 
 const activeProblemCache = Symbol("activeProblemCache")
 

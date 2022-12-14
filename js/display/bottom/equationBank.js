@@ -1,6 +1,6 @@
 import html from "../html.js"
 import { EquationBankCategory as Category } from "./equationBankCategory.js"
-import { EquationPack } from "../equationPacks/pack.js"
+import { EquationPack } from "../../equationPacks/pack.js"
 
 export class EquationBank extends React.Component {
   static defaultProps = {

@@ -1,4 +1,4 @@
-import html from "../html.js"
+import html from "./html.js"
 
 export class Equation extends React.Component {
   static defaultProps = {

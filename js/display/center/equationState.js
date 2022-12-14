@@ -1,7 +1,7 @@
 import html from "../html.js"
-import mjs from "../mathjs/index.js"
-import { Equation } from "../equationPacks/equation.js"
-import { ManipulationMenu } from "../display/manipulationMenu.js"
+import mjs from "../../mathjs/index.js"
+import { Equation } from "../equation.js"
+import { ManipulationMenu } from "../overlay/manipulationMenu.js"
 
 export class EquationState extends React.Component {
   static defaultProps = {
