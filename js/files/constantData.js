@@ -1,11 +1,7 @@
 export class ConstantData {
-  constructor(name, value, id=undefined) {
-    this.name = name
-    this.value = value
-    if (id == undefined) {
-      this.id = crypto.randomUUID()
-    } else {
-      this.id = id
-    }
+  constructor(name, value, id) {
+    this.name = name ?? new mathjs.SymbolNode("")
+    this.value = value ?? mathjs.unit("")
+    this.id = id ?? crypto.randomUUID()
   }
 }
