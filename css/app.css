@@ -143,6 +143,7 @@ body:has(.app) {
   width: 100%;
   height: 30px;
   background-color: #d3ffe6;
+  z-index: 2;
 }
 
 .app > aside > header > div {
@@ -165,6 +166,17 @@ body:has(.app) {
   border-top: 2px solid #b0ecca;
 }
 
+.constant.invalidName .mq-editable-field:first-child:not(:last-child) {
+  box-shadow: 0 0 5px red;
+}
+
+.constant.invalidValue .mq-editable-field:not(:first-child):not(:last-child) {
+  box-shadow: 0 0 5px red;
+}
+
+.constant.invalidUnit .mq-editable-field:first-child:last-child {
+  box-shadow: 0 0 5px red;
+}
 
 #collapseLeft {
   transform: rotate(180deg);

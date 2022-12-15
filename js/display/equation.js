@@ -19,10 +19,7 @@ export class Equation extends React.Component {
     this.mqRef = React.createRef()
   }
 
-  componentDidMount() {
-    // TODO: Move this event listener to MathQuill patch
-    document.addEventListener("selectionchange", this.handleSelection)
-    // When added to the visible structure
+  loadMathField() {
     if (!this.props.editable) {
       this.math = MQ.StaticMath(this.mqRef.current)
       for (let i = 0; i < this.math.innerFields.length; i++) {
@@ -41,8 +38,26 @@ export class Equation extends React.Component {
     }
   }
 
+  unloadMathField() {
+    this.math.revert()
+  }
+
+  componentDidMount() {
+    // TODO: Move this event listener to MathQuill patch
+    document.addEventListener("selectionchange", this.handleSelection)
+    // When added to the visible structure
+    this.loadMathField()
+  }
+
+  componentDidUpdate() {
+    // Reaload math field so that it doesnt break
+    this.unloadMathField()
+    this.loadMathField()
+  }
+
   componentWillUnmount() {
     document.removeEventListener("selectionchange", this.handleSelection)
+    this.unloadMathField()
   }
 
   static wrapHandlers(handlers, field) {
