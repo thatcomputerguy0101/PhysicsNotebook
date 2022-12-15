@@ -1,9 +1,14 @@
 import html from "../html.js"
+import mjs from "../../mathjs/index.js"
 import { EquationState } from "./equationState.js"
 
 export class EquationHistory extends React.Component {
   addState(newState, after=undefined) {
     if (typeof this.props.onChange == "function") {
+      if (mjs.simplify(newState, mjs.expandSolvable("vl == ce").map(pattern => ({l: pattern, r: "valid()"}))).equals(mjs.parse("valid()"))) {
+        newState = [newState, newState.map((node, i) => i == "args[1]" ? new mjs.ConstantNode(node.evaluate()) : node)]
+      }
+
       if (after == undefined) {
         this.props.onChange(this.props.states.concat(newState))
       } else {

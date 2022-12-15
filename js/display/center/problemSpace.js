@@ -19,7 +19,9 @@ export class ProblemSpace extends React.Component {
   }
 
   get constants() {
-    return this.props.constants.concat(this[solvedEquations])
+    return this.props.constants.filter(constant =>
+      !constant.name.equals(new mjs.SymbolNode("")) && constant.value.value != null
+    ).concat(this[solvedEquations])
   }
 
   get equations() {

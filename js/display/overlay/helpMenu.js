@@ -22,10 +22,10 @@ export class HelpMenu extends React.Component {
       image: "../steps/Step5.png",
       content: "5.	Continue performing operations. If you make a mistake, simply select text from a previous equation to get back on track."
     },
-    // {
-    //   image: "../steps/Step6.png",
-    //   content: "6.	Once an equation is solved for an unknown variable in terms of known variables, select the equals sign or the whole equation to substitute in the givens and calculate the solution."
-    // },
+    {
+      image: "../steps/Step6.png",
+      content: "6.	Once an equation is solved for an unknown variable in terms of known variables, select the whole equation to substitute in the givens and calculate the solution."
+    },
     // {
     //   image: "../steps/Step7.png",
     //   content: "7.	To move on to your next problem, click the plus button within the Problems pane. Click the name of problems to switch between them."

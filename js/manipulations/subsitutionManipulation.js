@@ -61,7 +61,7 @@ export class SubsitutionManipulation extends Manipulation {
       case "solve":
         // Ensure that variable is first
         const orderedSel = mjs.simplify(selection, mjs.expandSolvable("n == vl").map(pattern => ({l: pattern, r: pattern.split(" == ").reverse().join(" == ")})).concat({l: "MathQuillSelection(n)", r: "n"}))
-        return orderedSel.map((node, i) => i == 1 ? node.transform(node => scope.find(constant => node.equals(constant.name) && constant.valueNode.isConstantNode)?.valueNode ?? node) : node)
+        return orderedSel.map((node, i) => i == "args[1]" ? node.transform(node => scope.find(constant => node.equals(constant.name) && constant.valueNode.isConstantNode)?.valueNode ?? node) : node)
       default:
         throw new Error("Invalid subsitution mode")
     }
