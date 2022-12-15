@@ -58,7 +58,11 @@ export class EquationState extends React.Component {
         return // TODO: Expand selection to confuse user less
       }
       try {
-        this.setState({selection: texmp.parseTex(selection.rawFunction)})
+        selection = texmp.parseTex(selection.rawFunction)
+        if (!mjs.simplify(this.props.value).equals(mjs.simplify(selection, mjs.simplify.rules.concat({l: "MathQuillSelection(n)", r: "n"})))) {
+          throw new Error("Invalid selection border")
+        }
+        this.setState({selection})
       } catch (error) {
         console.warn(error)
         // Invalid selection border
