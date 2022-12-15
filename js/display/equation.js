@@ -49,15 +49,19 @@ export class Equation extends React.Component {
     this.loadMathField()
   }
 
-  getSnapshotBeforeUpdate() {
-    // Unload math field for the next one to be loaded correctly
-    this.unloadMathField()
+  getSnapshotBeforeUpdate(prevProps) {
+    if (prevProps.children != this.props.children) {
+      // Unload math field for the next one to be loaded correctly
+      this.unloadMathField()
+    }
     return null
   }
 
-  componentDidUpdate() {
-    // Reaload math field so that it doesnt break
-    this.loadMathField()
+  componentDidUpdate(prevProps) {
+    if (prevProps.children != this.props.children) {
+      // Reaload math field so that it doesnt break
+      this.loadMathField()
+    }
   }
 
   componentWillUnmount() {

@@ -10,4 +10,12 @@ export class ConstantData {
   get valueNode() {
     return new mjs.ConstantNode(this.value)
   }
+
+  setName(name) {
+    return new ConstantData(name, this.value, this.id)
+  }
+
+  setValue(value) {
+    return new ConstantData(this.name, value, this.id)
+  }
 }

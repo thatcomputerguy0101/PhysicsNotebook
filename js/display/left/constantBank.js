@@ -48,8 +48,8 @@ export class ConstantBank extends React.Component {
         rhtml`<Constant key=${constant.id}
                         name=${constant.name}
                         value=${constant.value}
-                        onNameChange=${name => this.setConstant({...constant, name}, i)}
-                        onValueChange=${value => this.setConstant({...constant, value}, i)}/>`
+                        onNameChange=${name => this.setConstant(constant.setName(name), i)}
+                        onValueChange=${value => this.setConstant(constant.setValue(value), i)}/>`
       )}
     `
   }
