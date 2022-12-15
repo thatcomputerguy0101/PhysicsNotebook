@@ -1,10 +1,10 @@
 import { ConstantData } from "./constantData.js"
 
 export class ProblemData {
-  constructor(name, equations, constants, id) {
+  constructor(name, constants, equations, id) {
     this.name = name ?? ""
-    this.equations = equations ?? []
     this.constants = constants ?? [new ConstantData()]
+    this.equations = equations ?? []
     this.id = id ?? crypto.randomUUID()
   }
 }
