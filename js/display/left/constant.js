@@ -51,8 +51,8 @@ export class Constant extends React.Component {
 
   render() {
     let rhtml = html.bind({Equation})
-    const [value, ...units] = this.props.value.toString().split(" ")
-    const unit = units.join(" ").replace(/^(?:\((.+)\)|(.+))\/(?:\((.+)\)|(.+))$/, "\\frac{$1$2}{$3$4}")
+    const value = this.props.value.value?.toString() ?? ""
+    const unit = this.props.value.formatUnits().replace(/^(?:\((.+)\)|(.+))\/(?:\((.+)\)|(.+))$/, "\\frac{$1$2}{$3$4}")
     return rhtml`
     <Equation className=${"constant" + (this.checkName() ? " invalidName" : "") + (this.checkValue() ? " invalidValue" : "") + (this.checkValue() ? " invalidUnit" : "")}
               innerFieldHandlers=${[{onEnter: this.onNameEdit}, {onEnter: this.onValueEdit}, {onEnter: this.onValueEdit}]}>

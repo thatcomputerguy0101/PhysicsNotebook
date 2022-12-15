@@ -101,7 +101,12 @@ function fragment(tokenizer) {
         contents.push(tag(tokenizer))
       } else {
         // Text (or external Tag)
-        contents.push(token.data)
+        if (typeof contents[contents.length - 1] == "string" && typeof token.data == "string") {
+          // Concatenate consecutive string
+          contents[contents.length - 1] += token.data
+        } else {
+          contents.push(token.data)
+        }
         token.consume()
       }
       if (tokenizer.isEmpty()) {
@@ -109,7 +114,11 @@ function fragment(tokenizer) {
       }
       token = tokenizer.nextToken()
     }
-    return contents
+    if (contents.length == 1) {
+      return contents[0]
+    } else {
+      return contents
+    }
   }
 }
 

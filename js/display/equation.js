@@ -49,9 +49,14 @@ export class Equation extends React.Component {
     this.loadMathField()
   }
 
+  getSnapshotBeforeUpdate() {
+    // Unload math field for the next one to be loaded correctly
+    this.unloadMathField()
+    return null
+  }
+
   componentDidUpdate() {
     // Reaload math field so that it doesnt break
-    this.unloadMathField()
     this.loadMathField()
   }
 
