@@ -3,9 +3,9 @@ import { Manipulation } from "./manipulation.js"
 
 export class SimpleManipulation extends Manipulation {
   constructor(replacements, symbol) {
-      super()
-      this.replacements = replacements
-      this.symbol = symbol
+    super()
+    this.replacements = replacements
+    this.symbol = symbol
   }
 
   substitute(state) {

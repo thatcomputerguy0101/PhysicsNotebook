@@ -32,7 +32,9 @@ export class EquationState extends React.Component {
       <div className="state">
         ${
           this.state.selection != null
-            ? rhtml`<ManipulationMenu selection=${this.state.selection} onManipulate=${this.onManipulate}/>`
+            ? rhtml`<ManipulationMenu selection=${this.state.selection}
+                                      scope=${this.props.scope}
+                                      onManipulate=${this.onManipulate}/>`
             : rhtml`<React.Fragment/>`
         }
         <Equation onSelectionChange=${this.handleSelection}>

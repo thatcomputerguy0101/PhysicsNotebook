@@ -19,7 +19,7 @@ export class ManipulationMenu extends React.Component {
     let rhtml = html.bind({ ManipulationItem })
 
     // Process this.props.selection for valid manipulations
-    var validManips = this.constructor.manipulations.filter(manip => manip.test(this.props.selection))
+    var validManips = this.constructor.manipulations.filter(manip => manip.test(this.props.selection, this.props.scope))
 
     if (validManips.length == 0) {
       // No manipulations are valid, return an empty fragment
@@ -30,7 +30,7 @@ export class ManipulationMenu extends React.Component {
     return rhtml`
       <div className="manipulations">
         ${validManips.map(manip =>
-            rhtml`<ManipulationItem key=${manip.symbol} symbol=${manip.symbol} apply=${() => this.addState(manip.substitute(this.props.selection))}/>`
+            rhtml`<ManipulationItem key=${manip.symbol} symbol=${manip.symbol} apply=${() => this.addState(manip.substitute(this.props.selection, this.props.scope))}/>`
         )}
       </div>
     `

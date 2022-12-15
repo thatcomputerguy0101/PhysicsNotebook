@@ -108,7 +108,7 @@ export class App extends React.Component {
         <ConstantBank constants=${this.constants} onChange=${constants => this.constants = constants}/>
       </aside>
       <main>
-        <ProblemSpace equations=${this.equations} onChange=${equations => this.equations = equations}/>
+        <ProblemSpace equations=${this.equations} constants=${this.constants} onChange=${equations => this.equations = equations}/>
         <footer>
           <header>
             <div> Equations </div>

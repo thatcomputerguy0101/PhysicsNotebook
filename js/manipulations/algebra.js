@@ -1,4 +1,5 @@
 import { SimpleManipulation } from "./simpleManipulation.js"
+import { SubsitutionManipulation } from "./subsitutionManipulation.js"
 
 export default [
   new SimpleManipulation([
@@ -78,16 +79,34 @@ export default [
 
   new SimpleManipulation([
     {l: "n1 == MathQuillSelection(n2^n3)", r: "nthRoot(n1,n3) == n2"},
-    {l: "n1 == MathQuillSelection(n2)^n3", r: "nthRoot(n1,n3) == n2"},
+    {l: "n1 == n2^MathQuillSelection(n3)", r: "nthRoot(n1,n3) == n2"},
     {l: "MathQuillSelection(n2^n3) == n1", r: "n2 == nthRoot(n1,n3)"},
-    {l: "MathQuillSelection(n2)^n3 == n1", r: "n2 == nthRoot(n1,n3)"},
+    {l: "n2^MathQuillSelection(n3) == n1", r: "n2 == nthRoot(n1,n3)"},
   ], "\\sqrt[x]{y}"),
 
   new SimpleManipulation([
     {l: "n1 == MathQuillSelection(n2^n3)", r: "log(n1,n2) == n3"},
     {l: "n1 == MathQuillSelection(n2)^n3", r: "log(n1,n2) == n3"},
-    {l: "MathQuillSelection(n1^n2) == n3", r: "log(n3,n1) == n2"},
-    {l: "MathQuillSelection(n1)^n2 == n3", r: "log(n3,n1) == n2"},
+    {l: "MathQuillSelection(n1^n2) == n3", r: "n2 == log(n3,n1)"},
+    {l: "MathQuillSelection(n1)^n2 == n3", r: "n2 == log(n3,n1)"},
+  ], "\\log(x)"),
 
-  ], "\log(x)"),
+  new SimpleManipulation([
+    {l: "n1 == MathQuillSelection(e^n2)", r: "ln(n1) == n2"},
+    {l: "n1 == MathQuillSelection(e)^n2", r: "ln(n1) == n2"},
+    {l: "MathQuillSelection(e^n1) == n2", r: "n1 == ln(n2)"},
+    {l: "MathQuillSelection(e)^n1 == n2", r: "n1 == ln(n2)"},
+  ], "\\ln(x)"),
+
+  new SubsitutionManipulation([
+    // These don't work with the syntax tree
+    // "vl MathQuillSelection(==) n",
+    // "n MathQuillSelection(==) vl",
+    "MathQuillSelection(vl == n)",
+    "MathQuillSelection(n == vl)",
+  ], "solve", "x=5"),
+
+  new SubsitutionManipulation([
+    "MathQuillSelection(vl)",
+  ], "subsitute", "x=2y"),
 ]

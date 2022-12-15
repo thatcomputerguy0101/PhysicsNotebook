@@ -6,4 +6,8 @@ export class ConstantData {
     this.value = value ?? mjs.unit("")
     this.id = id ?? crypto.randomUUID()
   }
+
+  get valueNode() {
+    return new mjs.ConstantNode(this.value)
+  }
 }
