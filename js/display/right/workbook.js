@@ -6,9 +6,9 @@ export class Workbook extends React.Component {
     let rhtml = html.bind({ Problem })
     return html`
       <header>
-        <img src="/icons/collapse.svg"/>
+        <img src="./icons/collapse.svg"/>
         <div> Problems </div>
-        <img src="/icons/plus.svg"/>
+        <img src="./icons/plus.svg"/>
       </header>
       ${
         this.props.problems.map(problem =>

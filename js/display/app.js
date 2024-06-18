@@ -88,14 +88,14 @@ export class App extends React.Component {
     return rhtml`
     <header className="header">
       <div className="iconsL">
-        <img id="logo" src="/icons/logo.svg"/>
+        <img id="logo" src="./icons/logo.svg"/>
       </div>
       <div className="title" id="title"> Physics Notebook </div>
       <div className="iconsR">
-        <img id="share" src="/icons/share.svg"/>
-        <img id="help" src="/icons/help.svg" onClick=${() => this.setState({showHelp: true})}/>
-        <img id="profile" src="/icons/profile.svg"/>
-        <img id="settings" src="/icons/settings.svg"/>
+        <img id="share" src="./icons/share.svg"/>
+        <img id="help" src="./icons/help.svg" onClick=${() => this.setState({showHelp: true})}/>
+        <img id="profile" src="./icons/profile.svg"/>
+        <img id="settings" src="./icons/settings.svg"/>
       </div>
     </header>
     ${
@@ -112,7 +112,7 @@ export class App extends React.Component {
         <footer>
           <header>
             <div> Equations </div>
-            <img id="collapseDown" src="/icons/collapse.svg"/>
+            <img id="collapseDown" src="./icons/collapse.svg"/>
           </header>
           <EquationBank onCreate=${equation => this.equations = this.equations.concat(equation)}/>
         </footer>
@@ -121,7 +121,7 @@ export class App extends React.Component {
         <Workbook name=${this.workbook.name}
                   problems=${this.workbook.problems}
                   onSelectProblem=${problem => this.activeProblem = problem}
-                  onProblemsChange=${problems => this.workbook = {...this.workbook, problems: this.problems}}/>
+                  onProblemsChange=${problems => this.workbook = {...this.workbook, problems}}/>
       </aside>
     </div>`
   }

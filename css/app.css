@@ -93,14 +93,14 @@ body:has(.app) {
   position: sticky;
   top: var(--header-height);
   background-color: #f0f9f2;
-  padding: 5px;
+  padding: 5px 15px;
 }
 
 .categoryHeader .arrow {
   position: absolute;
   top: 0;
   bottom: 0;
-  right: 5px;
+  right: 12px;
   margin: auto;
 }
 

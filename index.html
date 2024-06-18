@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <title>Physics Notebook</title>
     <link rel="stylesheet" href="css/app.css"/>
-    <link rel="stylesheet" href="deps/mathquill-0.10.1/mathquill.css"/>
+    <link rel="stylesheet" href="node_modules/mathquill/build/mathquill.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
   </head>
   <body>
     <div id="root">
-      Loading...
+      Loading Physics Notebook...
     </div>
 
     <!-- React -->
@@ -23,16 +23,18 @@
     <!-- MathQuill -->
     <!-- jQuery is purely for MathQuill, try to keep the use of it down to what is required for MathQuill -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="deps/mathquill-0.10.1/mathquill.js"></script>
+    <script>window.jQuery || document.write('<script src="node_modules/jquery/dist/jquery.min.js">\x3C/script>')</script>
+    <script src="node_modules/mathquill/build/mathquill.js"></script>
     <script>
       var MQ = MathQuill.getInterface(2);
     </script>
 
     <!-- MathJS -->
     <script src="node_modules/mathjs/lib/browser/math.js"></script>
+    <script>mathjs = math</script>
 
     <!-- tex-math-parser -->
-    <script src="deps/tex-math-parser/index.js"></script>
+    <script src="node_modules/tex-math-parser/dist/browser/index.js"></script>
 
     <!-- PhysicsNotbook Entry Point -->
     <script src="js/app.js" type="module"></script>

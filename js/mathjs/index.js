@@ -1,6 +1,7 @@
 import changeIn from "./changeIn.js"
 import net from "./net.js"
 import modifyRules from "./simplifyRules.js"
+import modifyUnits from "./units.js"
 import fixTex from "./fixTex.js"
 import expandSolvable from "./solvable.js"
 
@@ -19,3 +20,5 @@ texmp.import(imports)
 mjs.fixTex = fixTex
 
 modifyRules(mjs)
+
+modifyUnits(mjs)

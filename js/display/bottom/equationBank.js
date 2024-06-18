@@ -15,7 +15,7 @@ export class EquationBank extends React.Component {
       throw new Error("Equation pack not found!")
     }
     this.state = {
-      categoriesOpen: new Array(this.pack.length).fill(false)
+      categoriesOpen: new Array(this.pack.categories.length).fill(false)
     }
   }
 

@@ -40,9 +40,9 @@ export class ConstantBank extends React.Component {
     let rhtml = html.bind({Constant})
     return html`
       <header>
-        <img src="/icons/plus.svg" onClick=${this.addConstant}/>
+        <img src="./icons/plus.svg" onClick=${this.addConstant}/>
         <div> Givens </div>
-        <img id="collapseLeft" src="/icons/collapse.svg"/>
+        <img id="collapseLeft" src="./icons/collapse.svg"/>
       </header>
       ${this.constants.map((constant, i) =>
         rhtml`<Constant key=${constant.id}

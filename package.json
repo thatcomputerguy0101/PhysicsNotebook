@@ -1,9 +1,11 @@
 {
   "name": "physicsnotebook",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Digital notebook for solving physics problems.",
   "contributors": [
-    "Alan Everett <thatcomputerguy0101@gmail.com>"
+    "Alan Everett <thatcomputerguy0101@gmail.com>",
+    "Amy Dong <amydong.swe@gmail.com>",
+    "exb5429"
   ],
   "license": "UNLICENSED",
   "private": true,
@@ -22,11 +24,16 @@
     "es-module-shims": "^1.6.2",
     "mathjs": "^11.4.0",
     "mathquill": "^0.10.1-a",
-    "peggy": "^2.0.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "tex-math-parser": "github:thatcomputerguy0101/tex-math-parser#Physics_changeIn_and_sum"
   },
   "devDependencies": {
     "eslint": "^8.27.0"
+  },
+  "overrides": {
+    "tex-math-parser": {
+      "mathjs": "^11.4.0"
+    }
   }
 }
