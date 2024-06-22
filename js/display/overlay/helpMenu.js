@@ -97,10 +97,10 @@ export class HelpMenu extends React.Component {
           <div className="close" onPointerDown=${this.stop} onClick=${this.close}>⨯</div>
         </header>
         <main>
+          <img className="stepImage" src=${this.constructor.pages[this.state.page].image}/>
           <div>
-            <img className="stepImage" src=${this.constructor.pages[this.state.page].image}/>
+            ${this.constructor.pages[this.state.page].content}
           </div>
-          ${this.constructor.pages[this.state.page].content}
         </main>
         <footer>
           <button className="prev"

@@ -1,0 +1,25 @@
+.constant.mq-math-mode .mq-editable-field {
+  padding: 0px;
+  border-color: transparent;
+  transition: border-color 0.3s ease;
+}
+
+.constant.mq-math-mode:is(:hover, :focus-within) .mq-editable-field {
+  border-color: gray;
+}
+
+.constant.invalidName .mq-editable-field:first-child:not(:last-child) {
+  box-shadow: 0 0 5px red;
+}
+
+.constant.invalidValue .mq-editable-field:not(:first-child):not(:last-child) {
+  box-shadow: 0 0 5px red;
+}
+
+.constant.invalidUnit .mq-editable-field:first-child:last-child {
+  box-shadow: 0 0 5px red;
+}
+
+.problem {
+  font-family: 'Noto Sans', sans-serif;
+}

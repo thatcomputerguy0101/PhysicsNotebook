@@ -1,0 +1,47 @@
+.equations {
+  display: flex;
+  overflow: hidden;
+}
+
+.equationHistory {
+  padding: 0 10px;
+  display: flex;
+  height: 100%;
+  flex-shrink: 0;
+  flex-grow: 1;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow: auto;
+  scroll-behavior: smooth;
+}
+
+.equationHistory .state {
+  position: relative;
+  margin: 5px auto;
+  overflow: visible;
+  font-size: 18px;
+  color: #888;
+  transition: font-size 0.5s, color 0.5s;
+}
+
+/* Restore this if an x is used, and restore :not(:nth-child(2)) to later classes */
+/* .equationHistory .state:nth-child(2) {
+  font-family: sans-serif;
+  margin-top: auto;
+  padding-top: 15px;
+  cursor: pointer;
+} */
+
+.equationHistory .state:nth-last-child(2),
+.equationHistory .state:hover,
+.equationHistory .state:focus-within,
+.equationHistory .state.selected {
+  font-size: 22px;
+  color: #000;
+}
+
+.equationHistory .spacer {
+  height: 30%;
+  min-height: 70px;
+  flex-shrink: 0;
+}

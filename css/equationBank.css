@@ -1,0 +1,29 @@
+.categoryHeader {
+  position: sticky;
+  top: var(--header-height);
+  background-color: #f0f9f2;
+  padding: 5px 15px;
+  z-index: 1;
+}
+
+.categoryHeader .arrow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 12px;
+  margin: auto;
+}
+
+.categoryHeader.open .arrow {
+  transform: rotate(180deg);
+}
+
+.category {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.category > * {
+  margin: 10px 20px;
+}
