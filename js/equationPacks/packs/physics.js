@@ -56,8 +56,8 @@ export default {
     "n=\\frac{c}{\\vec{v}}",
     "\\vec{v}=\\lambda f",
     "E=\\frac{P}{4\\pi r^2}",
-    "n_1\\sin\\theta_1=n_2\\sin\\theta_2",
-    "\\sin\\theta_c=\\frac{n_2}{n_1}",
+    "n_1\\sin\\left(\\theta_1\\right)=n_2\\sin\\left(\\theta_2\\right)",
+    "\\sin\\left(\\theta_c\\right)=\\frac{n_2}{n_1}",
     "f=\\frac{r}{2}",
     "\\frac{1}{f}=\\frac{1}{d_o}+\\frac{1}{d_i}",
     "M=\\frac{h_i}{h_o}=-\\frac{d_i}{d_o}"

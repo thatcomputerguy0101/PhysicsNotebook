@@ -7,4 +7,8 @@ export class ProblemData {
     this.equations = equations ?? []
     this.id = id ?? crypto.randomUUID()
   }
+  
+  setName(name) {
+    return new ProblemData(name, this.constants, this.equation, this.id)
+  }
 }

@@ -41,7 +41,7 @@ export class App extends React.Component {
   }
 
   setProblem(problem, active=false) {
-    let i = this.workbook.problems.findIndex(oldProblem => oldProblem.id)
+    let i = this.workbook.problems.findIndex(oldProblem => oldProblem.id == problem.id)
     if (i != -1) {
       // Problem already exists, so update it
       this.workbook = {
@@ -55,6 +55,16 @@ export class App extends React.Component {
         ...this.workbook,
         problems: this.workbook.problems.concat([problem]),
         activeProblemId: active ? problem.id : this.workbook.activeProblemId
+      }
+    }
+  }
+
+  setProblems(problems) {
+    this.workbook = {...this.workbook, problems}
+    if (!problems.includes(this[activeProblemCache])) {
+      updateActiveProblem()
+      if (this[activeProblemCache] === undefined) {
+        setProblem(problems[0], true)
       }
     }
   }

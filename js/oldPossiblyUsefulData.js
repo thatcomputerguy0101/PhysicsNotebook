@@ -1,7 +1,7 @@
 // TODO: All this data should have a home somewhere else (some of it may be discarded)
 // Most of this needs updated to a less-stupid format
 
-{
+_ = {
   constants: {
     a_g: [9.80665, "\\frac{m}{s^2}"],
     G: [6.6740831e-11, "\\frac{N m^2}{kg^2}"],
@@ -35,53 +35,53 @@
   //   "\\phi": "r"
   // },
   symbols: {
-    α: /\\alpha/g,
-    β: /\\beta/g,
-    γ: /\\gamma/g,
-    Γ: /\\Gamma/g,
-    δ: /\\delta/g,
-    Δ: /\\Delta/g,
-    "∆": /\\Delta/g,
-    ϵ: /\\epsilon/g,
-    ε: /\\varepsilon/g,
-    ζ: /\\zeta/g,
-    η: /\\eta/g,
-    θ: /\\theta/g,
-    ϑ: /\\vartheta/g,
-    Θ: /\\Theta/g,
-    κ: /\\kappa/g,
-    λ: /\\lambda/g,
-    Λ: /\\Lambda/g,
-    μ: /\\mu/g,
-    µ: /\\mu/g,
-    ν: /\\nu/g,
-    ξ: /\\xi/g,
-    Ξ: /\\Xi/g,
-    π: /\\pi/g,
-    Π: /\\Pi/g,
-    ϖ: /\\varpi/g,
-    ρ: /\\rho/g,
-    ϱ: /\\varrho/g,
-    σ: /\\sigma/g,
-    Σ: /\\Sigma/g,
-    ς: /\\varsigma/g,
-    τ: /\\tau/g,
-    υ: /\\upsilon/g,
-    Υ: /\\Upsilon/g,
-    φ: /\\phi/g,
-    Φ: /\\Phi/g,
-    ϕ: /\\varphi/g,
-    χ: /\\chi/g,
-    ψ: /\\psi/g,
-    Ψ: /\\Psi/g,
-    ω: /\\omega/g,
-    Ω: /\\Omega/g,
+    // α: /\\alpha/g,
+    // β: /\\beta/g,
+    // γ: /\\gamma/g,
+    // Γ: /\\Gamma/g,
+    // δ: /\\delta/g,
+    // Δ: /\\Delta/g,
+    // "∆": /\\Delta/g,
+    // ϵ: /\\epsilon/g,
+    // ε: /\\varepsilon/g,
+    // ζ: /\\zeta/g,
+    // η: /\\eta/g,
+    // θ: /\\theta/g,
+    // ϑ: /\\vartheta/g,
+    // Θ: /\\Theta/g,
+    // κ: /\\kappa/g,
+    // λ: /\\lambda/g,
+    // Λ: /\\Lambda/g,
+    // μ: /\\mu/g,
+    // µ: /\\mu/g,
+    // ν: /\\nu/g,
+    // ξ: /\\xi/g,
+    // Ξ: /\\Xi/g,
+    // π: /\\pi/g,
+    // Π: /\\Pi/g,
+    // ϖ: /\\varpi/g,
+    // ρ: /\\rho/g,
+    // ϱ: /\\varrho/g,
+    // σ: /\\sigma/g,
+    // Σ: /\\Sigma/g,
+    // ς: /\\varsigma/g,
+    // τ: /\\tau/g,
+    // υ: /\\upsilon/g,
+    // Υ: /\\Upsilon/g,
+    // φ: /\\phi/g,
+    // Φ: /\\Phi/g,
+    // ϕ: /\\varphi/g,
+    // χ: /\\chi/g,
+    // ψ: /\\psi/g,
+    // Ψ: /\\Psi/g,
+    // ω: /\\omega/g,
+    // Ω: /\\Omega/g,
     "°": /\\degree/g,
     Å: /\\AA/g,
     "∂": /\\partial/g,
     "∞": /\\infinity/g,
-    "•": /\\cdot/g,
-    "⁄": /\\frac/g
+    // "•": /\\cdot/g,
+    // "⁄": /\\frac/g
   },
   substitution: {
     " degC ": /\\degree C/g,
@@ -208,77 +208,77 @@
         modalContent.appendChild(rename);
       }
     },
-    {
-      name: "Substitute and Solve",
-      title: "x=#",
-      requirements: /^(?=.*(?:^(?:\\\$s)?|=)(?:\\Sigma ?|\\Delta ?)?(?:\\vec(\\\d+l){)?(?:[A-Za-z]|\\[A-Za-z]+(?<!Sigma|Delta) ?)(?:\1})?(?:_(?:[A-Za-z0-9]|(\\\d+l){[A-Za-z0-9\\ ]*\2}))?(?:=|(?:\\\$e)?$))(?:.*=)?\\\$s.*\\\$e(?:=.*)?$/,
-      verification: (sel) =>
-        parseBrackets(sel.replace(/\\\$[se]/g, "").replace(/(?:^|=)(?:\\Sigma ?|\\Delta ?)?(?:\\vec(\\\d+l){)?(?:[A-Za-z]|\\[A-Za-z]+(?<!Sigma|Delta) ?)(?:\1})?(?:_(?:[A-Za-z0-9]|(\\\d+l){[A-Za-z0-9\\ ]*\2}))?(?:=|$)/, "")).match(/(?:\\Sigma ?|\\Delta ?)?(?:\\vec(\\\d+l){)?(?:(?<!\\[^\s\\{}()[\]]*)[A-Za-z]|\\[A-Za-z]+(?<!Sigma|Delta|sin|cos|tan|csc|sec|cot|log)(?![A-Za-z]*\\\d+l)(?!=[A-Za-z]*\\\d+l?) ?)(?:\1})?(?:_(?:[A-Za-z0-9]|(\\\d+l){[A-Za-z0-9\\ ]*\2}))?/g).every(variable => {
-          variable = unparseBrackets(variable);
-          return problemSet.problems[currentProblem].givens[variable] || problemSet.problems[currentProblem].equations.reduce((res, eq) => {
-            if (eq.answer[0])
-              res[eq.answer[0]] = eq.answer[1];
-            return res;
-          }, {})[variable] || data.constants[variable];
-        }) && !(variable => {
-          variable = unparseBrackets(variable);
-          return problemSet.problems[currentProblem].givens[variable] || problemSet.problems[currentProblem].equations.reduce((res, eq) => {
-            if (eq.answer[0])
-              res[eq.answer[0]] = eq.answer[1];
-            return res;
-          }, {})[variable];
-        })(parseBrackets(sel.replace(/\\\$[se]/g, "").replace(/^(?:.*=)?((?:\\Sigma ?|\\Delta ?)?(?:\\vec(\\\d+l){)?(?:[A-Za-z]|\\[A-Za-z]+(?<!Sigma|Delta) ?)(?:\2})?(?:_(?:[A-Za-z0-9]|(\\\d+l){[A-Za-z0-9\\ ]*\3}))?)(?:=.*)?$/, "$1"))),
-      operation: (sel, eq) => {
-        if (parseBrackets(sel.replace(/\\\$[se]/)).match(/=(?:\\Sigma ?|\\Delta ?)?(?:\\vec(\\\d+l){)?(?:[A-Za-z]|\\[A-Za-z]+(?<!Sigma|Delta) ?)(?:\1})?(?:_(?:[A-Za-z0-9]|(\\\d+l){[A-Za-z0-9\\ ]*\2}))?$/)) {
-          data.operations.find(op => op.name == "Flip Equation").operation(sel, eq);
-          sel = sel.split("=").reverse().join("=");
-        }
-        var start = sel.replace(/\\\$[se]/g, "");
-        eq.current = start.replace(/=.*/, "=") + unparseBrackets(parseBrackets(start.replace(/.*=/, "")).replace(/(?:\\Sigma ?|\\Delta ?)?(?:\\vec(\\\d+l){)?(?:(?<!\\[^\s\\{}()[\]]*)[A-Za-z]|\\[A-Za-z]+(?<!Sigma|Delta|sin|cos|tan|csc|sec|cot|log)(?![A-Za-z]*\\\d+l)(?!=[A-Za-z]*\\\d+l?) ?)(?:\1})?(?:_(?:[A-Za-z0-9]|(\\\d+l){[A-Za-z0-9\\ ]*\2}))?/g, variable => {
-          variable = unparseBrackets(variable);
-          var varVal = problemSet.problems[currentProblem].givens[variable] || problemSet.problems[currentProblem].equations.reduce((res, eq) => {
-            if (eq.answer[0])
-              res[eq.answer[0]] = eq.answer[1];
-            return res;
-          }, {})[variable] || data.constants[variable];
-          return varVal[0] + "\\ \\left[" + varVal[1] + "\\right]";
-        })).replace(/](\d)/g, "]\\cdot $1");
-        eq.current = operate(eq.current.replace(/\\left\[|\\right\]/g, " "), "evaluate");
-        eq.answer = eq.current.split(/ ?= ?/);
-        eq.answer[1] = eq.answer[1].replace("\\right]", "").split("\\left[");
-        eq.history.forEach((tex, i) => eq.history[i] = tex.replace(/\d+\.?\d*/g, (num) => math.format(parseFloat(num), 3).replace(/e+?(-?\d+)/, "\\times 10^{$1}")));
-      }
-    },
-    {
-      name: "Add/Subtract",
-      title: "+/-",
-      requirements: /(?:\\\$s[+-]|^\\\$s|(?<=[=+-])\\\$s)[^=+-]*(?:(\\\d+l?)[([{|].*\1[|}\])])?[^=+-]*\\\$e(?=[+-=]|$)(?!.*(\\\d+l?)[)}\]|](?<=\1[({[|].*\\\$s.*))/,
-      operation: (sel, eq) => {
-        eq.current = operate(sel.replace(/\\\$[se]/g, ""), "($&) - ($0)", sel.replace(/.*\\\$s|\\\$e.*/g, ""))
-      }
-    },
-    {
-      name: "Multiply/Divide",
-      title: "•/÷",
-      requirements: /(?<![^=](?<!^)[-+][^=]*)(?<![_^])(?:\\\$s-?(?=[\\A-Za-z\d])(?:(?<!\d\\\$s)\d*\.?\d*(?!\\\$e\d))?(?:(?<!\\Sigma\\\$s|\\Delta\\\$s)(?:\\Sigma ?|\\Delta ?)?(?:[A-Za-z]|\\[A-Za-z]+(?<!Sigma|Delta)(?:(\\\d+l)[[{].*\1[\]}])* ?)(?:_(?:[A-Za-z\d]|(\\\d+l){[A-Za-z\d\\ ]*\2}))?(?:\^(?:[A-Za-z0-9]|(\\\d+l){[A-Za-z0-9\\ ]*\3}))?(?!\\\$e_))*\\\$e|\\frac(\\\d+l){.*\4}(\\\d+l){\\\$s.*\\\$e\5})(?![^=]*[-+])(?!.*(\\\d+l?)[)}\]|](?<=(?<!\\frac(?:\7{.*(\\\d+l)})?)\6[({[|].*\\\$s.*))/,
-      operation: (sel, eq) => {
-        if (parseBrackets(sel).match(/\\frac(\\\d+l){.*\1}(\\\d+l){.*\\\$s.*\\\$e.*\2}/))
-          eq.current = operate(sel.replace(/\\\$[se]/g, ""), "($&) * ($0)", sel.replace(/.*\\\$s|\\\$e.*/g, ""))
-        else
-          eq.current = operate(sel.replace(/\\\$[se]/g, ""), "($&) / ($0)", sel.replace(/.*\\\$s|\\\$e.*/g, "").replace(/^-$/, "-1"))
-      }
-    },
-    {
-      name: "Exponentiate/Radicate",
-      title: "^/√",
-      requirements: /(?:^|=)(?:\^(\\\d+l){\\\$s.*\\\$e\1}|\\\$s(?:(?:\\Sigma ?|\\Delta ?)?(?:\\vec(\\\d+l){)?(?:[A-Za-z]|\\[A-Za-z]+(?<!Sigma|Delta) ?)(?:\2})?(?:_(?:[A-Za-z0-9]|(\\\d+l){[A-Za-z0-9\\ ]*\3}))?|(\\\d+)[(|].*\4[|)])\^(?:[A-Za-z\d]|(\\\d+l){.*\5})\\\$e|\\\$s\\sqrt(?:(\\\d+l)\[.*\6\])?(\\\d+l){.*\7}\\\$e)(?:$|=)/,
-      operation: (sel, eq) => {
-        if (sel.replace(/.*\\\$s|\\\$e.*/g).match(/^\\sqrt/))
-          eq.current = operate(sel.replace(/\\\$[se]/g, ""), "($&) ^ ($0)", parseBrackets(sel.replace(/.*\\\$s|\\\$e.*/g, "")).replace(/\\sqrt(?:(\\\d+l)[(.*)\1])(\\\d+l){.*\3}/, "$2") || 2)
-        else
-          eq.current = operate(sel.replace(/\\\$[se]/g, ""), "($&) ^ (1 / ($0))", sel.replace(/.*\\\$s|\\\$e.*/g, "").replace(/[^^]*\^/, ""))
-      }
-    },
+    // {
+    //   name: "Substitute and Solve",
+    //   title: "x=#",
+    //   requirements: /^(?=.*(?:^(?:\\\$s)?|=)(?:\\Sigma ?|\\Delta ?)?(?:\\vec(\\\d+l){)?(?:[A-Za-z]|\\[A-Za-z]+(?<!Sigma|Delta) ?)(?:\1})?(?:_(?:[A-Za-z0-9]|(\\\d+l){[A-Za-z0-9\\ ]*\2}))?(?:=|(?:\\\$e)?$))(?:.*=)?\\\$s.*\\\$e(?:=.*)?$/,
+    //   verification: (sel) =>
+    //     parseBrackets(sel.replace(/\\\$[se]/g, "").replace(/(?:^|=)(?:\\Sigma ?|\\Delta ?)?(?:\\vec(\\\d+l){)?(?:[A-Za-z]|\\[A-Za-z]+(?<!Sigma|Delta) ?)(?:\1})?(?:_(?:[A-Za-z0-9]|(\\\d+l){[A-Za-z0-9\\ ]*\2}))?(?:=|$)/, "")).match(/(?:\\Sigma ?|\\Delta ?)?(?:\\vec(\\\d+l){)?(?:(?<!\\[^\s\\{}()[\]]*)[A-Za-z]|\\[A-Za-z]+(?<!Sigma|Delta|sin|cos|tan|csc|sec|cot|log)(?![A-Za-z]*\\\d+l)(?!=[A-Za-z]*\\\d+l?) ?)(?:\1})?(?:_(?:[A-Za-z0-9]|(\\\d+l){[A-Za-z0-9\\ ]*\2}))?/g).every(variable => {
+    //       variable = unparseBrackets(variable);
+    //       return problemSet.problems[currentProblem].givens[variable] || problemSet.problems[currentProblem].equations.reduce((res, eq) => {
+    //         if (eq.answer[0])
+    //           res[eq.answer[0]] = eq.answer[1];
+    //         return res;
+    //       }, {})[variable] || data.constants[variable];
+    //     }) && !(variable => {
+    //       variable = unparseBrackets(variable);
+    //       return problemSet.problems[currentProblem].givens[variable] || problemSet.problems[currentProblem].equations.reduce((res, eq) => {
+    //         if (eq.answer[0])
+    //           res[eq.answer[0]] = eq.answer[1];
+    //         return res;
+    //       }, {})[variable];
+    //     })(parseBrackets(sel.replace(/\\\$[se]/g, "").replace(/^(?:.*=)?((?:\\Sigma ?|\\Delta ?)?(?:\\vec(\\\d+l){)?(?:[A-Za-z]|\\[A-Za-z]+(?<!Sigma|Delta) ?)(?:\2})?(?:_(?:[A-Za-z0-9]|(\\\d+l){[A-Za-z0-9\\ ]*\3}))?)(?:=.*)?$/, "$1"))),
+    //   operation: (sel, eq) => {
+    //     if (parseBrackets(sel.replace(/\\\$[se]/)).match(/=(?:\\Sigma ?|\\Delta ?)?(?:\\vec(\\\d+l){)?(?:[A-Za-z]|\\[A-Za-z]+(?<!Sigma|Delta) ?)(?:\1})?(?:_(?:[A-Za-z0-9]|(\\\d+l){[A-Za-z0-9\\ ]*\2}))?$/)) {
+    //       data.operations.find(op => op.name == "Flip Equation").operation(sel, eq);
+    //       sel = sel.split("=").reverse().join("=");
+    //     }
+    //     var start = sel.replace(/\\\$[se]/g, "");
+    //     eq.current = start.replace(/=.*/, "=") + unparseBrackets(parseBrackets(start.replace(/.*=/, "")).replace(/(?:\\Sigma ?|\\Delta ?)?(?:\\vec(\\\d+l){)?(?:(?<!\\[^\s\\{}()[\]]*)[A-Za-z]|\\[A-Za-z]+(?<!Sigma|Delta|sin|cos|tan|csc|sec|cot|log)(?![A-Za-z]*\\\d+l)(?!=[A-Za-z]*\\\d+l?) ?)(?:\1})?(?:_(?:[A-Za-z0-9]|(\\\d+l){[A-Za-z0-9\\ ]*\2}))?/g, variable => {
+    //       variable = unparseBrackets(variable);
+    //       var varVal = problemSet.problems[currentProblem].givens[variable] || problemSet.problems[currentProblem].equations.reduce((res, eq) => {
+    //         if (eq.answer[0])
+    //           res[eq.answer[0]] = eq.answer[1];
+    //         return res;
+    //       }, {})[variable] || data.constants[variable];
+    //       return varVal[0] + "\\ \\left[" + varVal[1] + "\\right]";
+    //     })).replace(/](\d)/g, "]\\cdot $1");
+    //     eq.current = operate(eq.current.replace(/\\left\[|\\right\]/g, " "), "evaluate");
+    //     eq.answer = eq.current.split(/ ?= ?/);
+    //     eq.answer[1] = eq.answer[1].replace("\\right]", "").split("\\left[");
+    //     eq.history.forEach((tex, i) => eq.history[i] = tex.replace(/\d+\.?\d*/g, (num) => math.format(parseFloat(num), 3).replace(/e+?(-?\d+)/, "\\times 10^{$1}")));
+    //   }
+    // },
+    // {
+    //   name: "Add/Subtract",
+    //   title: "+/-",
+    //   requirements: /(?:\\\$s[+-]|^\\\$s|(?<=[=+-])\\\$s)[^=+-]*(?:(\\\d+l?)[([{|].*\1[|}\])])?[^=+-]*\\\$e(?=[+-=]|$)(?!.*(\\\d+l?)[)}\]|](?<=\1[({[|].*\\\$s.*))/,
+    //   operation: (sel, eq) => {
+    //     eq.current = operate(sel.replace(/\\\$[se]/g, ""), "($&) - ($0)", sel.replace(/.*\\\$s|\\\$e.*/g, ""))
+    //   }
+    // },
+    // {
+    //   name: "Multiply/Divide",
+    //   title: "•/÷",
+    //   requirements: /(?<![^=](?<!^)[-+][^=]*)(?<![_^])(?:\\\$s-?(?=[\\A-Za-z\d])(?:(?<!\d\\\$s)\d*\.?\d*(?!\\\$e\d))?(?:(?<!\\Sigma\\\$s|\\Delta\\\$s)(?:\\Sigma ?|\\Delta ?)?(?:[A-Za-z]|\\[A-Za-z]+(?<!Sigma|Delta)(?:(\\\d+l)[[{].*\1[\]}])* ?)(?:_(?:[A-Za-z\d]|(\\\d+l){[A-Za-z\d\\ ]*\2}))?(?:\^(?:[A-Za-z0-9]|(\\\d+l){[A-Za-z0-9\\ ]*\3}))?(?!\\\$e_))*\\\$e|\\frac(\\\d+l){.*\4}(\\\d+l){\\\$s.*\\\$e\5})(?![^=]*[-+])(?!.*(\\\d+l?)[)}\]|](?<=(?<!\\frac(?:\7{.*(\\\d+l)})?)\6[({[|].*\\\$s.*))/,
+    //   operation: (sel, eq) => {
+    //     if (parseBrackets(sel).match(/\\frac(\\\d+l){.*\1}(\\\d+l){.*\\\$s.*\\\$e.*\2}/))
+    //       eq.current = operate(sel.replace(/\\\$[se]/g, ""), "($&) * ($0)", sel.replace(/.*\\\$s|\\\$e.*/g, ""))
+    //     else
+    //       eq.current = operate(sel.replace(/\\\$[se]/g, ""), "($&) / ($0)", sel.replace(/.*\\\$s|\\\$e.*/g, "").replace(/^-$/, "-1"))
+    //   }
+    // },
+    // {
+    //   name: "Exponentiate/Radicate",
+    //   title: "^/√",
+    //   requirements: /(?:^|=)(?:\^(\\\d+l){\\\$s.*\\\$e\1}|\\\$s(?:(?:\\Sigma ?|\\Delta ?)?(?:\\vec(\\\d+l){)?(?:[A-Za-z]|\\[A-Za-z]+(?<!Sigma|Delta) ?)(?:\2})?(?:_(?:[A-Za-z0-9]|(\\\d+l){[A-Za-z0-9\\ ]*\3}))?|(\\\d+)[(|].*\4[|)])\^(?:[A-Za-z\d]|(\\\d+l){.*\5})\\\$e|\\\$s\\sqrt(?:(\\\d+l)\[.*\6\])?(\\\d+l){.*\7}\\\$e)(?:$|=)/,
+    //   operation: (sel, eq) => {
+    //     if (sel.replace(/.*\\\$s|\\\$e.*/g).match(/^\\sqrt/))
+    //       eq.current = operate(sel.replace(/\\\$[se]/g, ""), "($&) ^ ($0)", parseBrackets(sel.replace(/.*\\\$s|\\\$e.*/g, "")).replace(/\\sqrt(?:(\\\d+l)[(.*)\1])(\\\d+l){.*\3}/, "$2") || 2)
+    //     else
+    //       eq.current = operate(sel.replace(/\\\$[se]/g, ""), "($&) ^ (1 / ($0))", sel.replace(/.*\\\$s|\\\$e.*/g, "").replace(/[^^]*\^/, ""))
+    //   }
+    // },
     // {
     //   name: "Logarithmize",
     //   title: "log(x)",

@@ -94,6 +94,7 @@ body:has(.app) {
   top: var(--header-height);
   background-color: #f0f9f2;
   padding: 5px 15px;
+  z-index: 1;
 }
 
 .categoryHeader .arrow {
@@ -164,6 +165,16 @@ body:has(.app) {
 
 .app > aside > :not(header) ~ * {
   border-top: 2px solid #b0ecca;
+}
+
+.constant.mq-math-mode .mq-editable-field {
+  padding: 0px;
+  border-color: transparent;
+  transition: border-color 0.3s ease;
+}
+
+.constant.mq-math-mode:is(:hover, :focus-within) .mq-editable-field {
+  border-color: gray;
 }
 
 .constant.invalidName .mq-editable-field:first-child:not(:last-child) {
@@ -254,6 +265,10 @@ body:has(.app) {
   border: 2px solid #888889;
   border-radius: 10px;
   padding: 0 5px;
+}
+
+.problem {
+  font-family: 'Noto Sans', sans-serif;
 }
 
 .helpMenu {

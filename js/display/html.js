@@ -392,7 +392,7 @@ class Token {
           return "tag_start"
         case 2:
           return "tag_name"
-        case 3: 
+        case 3:
           return "tag_end"
         case 4:
           return "attribute_name"
