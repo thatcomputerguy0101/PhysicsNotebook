@@ -1,6 +1,11 @@
+.equationBank {
+  height: calc(100% - var(--header-height));
+  overflow-y: auto;
+}
+
 .categoryHeader {
   position: sticky;
-  top: var(--header-height);
+  top: 0px;
   background-color: #f0f9f2;
   padding: 5px 15px;
   z-index: 1;

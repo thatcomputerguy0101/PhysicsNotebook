@@ -35,6 +35,10 @@ export class EquationBank extends React.Component {
   render() {
     let rhtml = html.bind({ Category })
     return html`
+      <header>
+        <div> Equations </div>
+        <img id="collapseDown" src="./icons/collapse.svg" onClick=${this.props.onToggleCollapsed}/>
+      </header>
       <div className="equationBank">
       ${
       this.pack.categories.map((category, i) => rhtml`

@@ -42,15 +42,17 @@ export class ConstantBank extends React.Component {
       <header>
         <img src="./icons/plus.svg" onClick=${this.addConstant}/>
         <div> Givens </div>
-        <img id="collapseLeft" src="./icons/collapse.svg"/>
+        <img id="collapseLeft" src="./icons/collapse.svg" onClick=${this.props.onToggleCollapsed}/>
       </header>
-      ${this.constants.map((constant, i) =>
-        rhtml`<Constant key=${constant.id}
-                        name=${constant.name}
-                        value=${constant.value}
-                        onNameChange=${name => this.setConstant(constant.setName(name), i)}
-                        onValueChange=${value => this.setConstant(constant.setValue(value), i)}/>`
-      )}
+      <div className="constantBank">
+        ${this.constants.map((constant, i) =>
+          rhtml`<Constant key=${constant.id}
+                          name=${constant.name}
+                          value=${constant.value}
+                          onNameChange=${name => this.setConstant(constant.setName(name), i)}
+                          onValueChange=${value => this.setConstant(constant.setValue(value), i)}/>`
+        )}
+      </div>
     `
   }
 }

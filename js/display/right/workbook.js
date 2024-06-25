@@ -41,10 +41,11 @@ export class Workbook extends React.Component {
     let rhtml = html.bind({ Problem })
     return html`
       <header>
-        <img src="./icons/collapse.svg"/>
+        <img id="collapseRight" src="./icons/collapse.svg" onClick=${this.props.onToggleCollapsed}/>
         <div> Problems </div>
         <img src="./icons/plus.svg" onClick=${this.addProblem}/>
-        </header>
+      </header>
+      <div className="problemBank">
         ${
           this.props.problems.map((problem, i) =>
             rhtml`<Problem key=${problem.id}
@@ -53,6 +54,7 @@ export class Workbook extends React.Component {
                            onNameChange=${() => this.setProblem(problem.setName(name), i)}/>`
           )
         }
+      </div>
     `
   }
 }

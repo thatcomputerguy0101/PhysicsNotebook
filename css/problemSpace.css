@@ -1,10 +1,12 @@
 .equations {
   display: flex;
-  overflow: hidden;
+  gap: 15px;
+  margin: 0px 15px;
+  overflow-x: scroll;
+  overflow-y: hidden
 }
 
 .equationHistory {
-  padding: 0 10px;
   display: flex;
   height: 100%;
   flex-shrink: 0;
@@ -42,6 +44,5 @@
 
 .equationHistory .spacer {
   height: 30%;
-  min-height: 70px;
   flex-shrink: 0;
 }

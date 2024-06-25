@@ -1,3 +1,7 @@
+.constantBank, .problemBank {
+  overflow-y: auto;
+}
+
 .constant.mq-math-mode .mq-editable-field {
   padding: 0px;
   border-color: transparent;

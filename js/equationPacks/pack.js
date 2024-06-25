@@ -15,7 +15,7 @@ class Category {
     }
     return new Category(name, json.map(equation => {
       try {
-        return texmp.parseTex(equation.replace(/\\vec/g, ""))
+        return texmp.parseTex(equation.replace(/\\vec/g, "")) // TODO: Remove this once vectors are supported
       } catch (error) {
         console.warn(error, equation)
         return null

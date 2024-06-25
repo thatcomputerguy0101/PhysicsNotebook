@@ -176,6 +176,8 @@ function tag(tokenizer) {
       }
       value = value.consume().data
       attrOrEnd = tokenizer.nextToken()
+    } else {
+      value = true
     }
     attributes[attribute.name] = value
   }
