@@ -21,8 +21,8 @@ export class Workspace extends React.Component {
   }
 
   set workbook(workbook) {
-    if (typeof this.onWorkbookChange == "funciton") {
-      this.onWorkbookChange(workbook)
+    if (typeof this.props.onWorkbookChange == "function") {
+      this.props.onWorkbookChange(workbook)
     }
   }
 

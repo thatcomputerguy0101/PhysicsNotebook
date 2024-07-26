@@ -42,7 +42,7 @@ export class App extends React.Component {
           : null
       }
       <div className="app">
-        <Workspace workbook=${this.workbook} onWorkbookChange${workbook => this.workbook = workbook}/>
+        <Workspace workbook=${this.workbook} onWorkbookChange=${workbook => this.workbook = workbook}/>
       </div>
     `
   }
